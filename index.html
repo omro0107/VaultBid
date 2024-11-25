@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta name="description" content="Your search for art, design, collectibles, and hidden gems starts here!">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <title>Home</title>
+        <link rel="icon" type="image/png" sizes="32x32" href="/public/favicon_io/favicon-32x32.png">
+        <link rel="icon" type="image/png" sizes="16x16" href="/public/favicon_io/favicon-16x16.png">
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&family=Open+Sans:ital,wght@0,300..800;1,300..800&family=Playfair+Display:ital,wght@0,400..900;1,400..900&display=swap" rel="stylesheet">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" integrity="sha512-z3gLpd7yknf1YoNbCzqRKc4qyor8gaKU1qmn+CShxbuBusANI9QpRohGBreCFkKxLhei6S9CQXFEbbKuqLg0DA==" crossorigin="anonymous" referrerpolicy="no-referrer">
+        <script type="module" src="index.js"></script>
+    </head>
+    <body>
+        <header>
+            <a href="index.html" aria-label="Home"><h1 class="logo">VAULTBID</h1></a>
+            <nav>
+                <ul>
+                    <li id="auctions"><a href="auctions.html" aria-label="Auctions">Auctions</a></li>
+                    <li id="list"><a href="create-listing.html" aria-label="List">List</a></li>
+                    <li id="profile"><a href="profile.html" aria-label="Profile">Profile</a></li>
+                    <li id="about"><a href="about.html" aria-label="About">About</a></li>
+                    <li id="contact"><a href="contact.html" aria-label="Contact">Contact</a></li>
+                </ul>
+            </nav>
+            <ul>
+              <li><i class="fa-solid fa-magnifying-glass" id="search" aria-hidden="true"></i></li>
+              <li><i class="fa-solid fa-bag-shopping" id="holding" aria-hidden="true"></i></li>
+              <li><i class="fa-solid fa-right-from-bracket" id="logout" aria-hidden="true"></i></li>
+            </ul>
+        </header>
+        <main>
+            <div id="loader" class="loader">
+                <i class="fa fa-spinner fa-spin"></i>
+            </div>
+            <div id="search-container">
+              <h2>Your search for art, design, collectibles, and hidden gems starts here</h2>
+              <div id="searchbar"></div>
+            </div>
+            <div class="carousel-container">
+              <i class="fa-solid fa-chevron-left" id="prev-btn"></i>
+              <div id="listings-display" class="listings-display"></div>
+              <i class="fa-solid fa-chevron-right" id="next-btn"></i>
+            </div>
+            <div class="listings-feed">
+                <div id="listings-thumbnails" class="listings-thumbnails"></div>
+            </div>
+        </main>
+        <footer> 
+          <div class="footer-left">
+            <div class="address">                        
+                <a href="#" aria-label="Home"><h4>VAULTBID</h4></a>
+                <ul>
+                  <li>VaultBid HQ</li>
+                  <li>Dronning Eufemias gate 125</li>
+                  <li>BOX 7362</li>
+                  <li>0191 Oslo</li>
+                </ul>
+            </div>
+            <p>&copy; 2024 Vaultbid Group AS</p>
+          </div>
+          <ul class="support">
+              <li><a href="termsandconditions.html" aria-label="terms and conditions">Terms & Conditions</a></li>
+              <li><a href="privacypolicy.html" aria-label="privacy policy">Privacy policy</a></li>
+              <li><a href="contact.html" aria-label="contact">Contact us</a></li>
+          </ul>
+          <div class="footer-right">
+            <form id="newsletter" class="newsletter-form">
+              <label for="email">Stay up-to-date with our auctions</label>
+              <input name="email" type="email" id="email" placeholder="Enter your e-mail">
+              <button class="subscribe-button" type="button">Subscribe</button>
+            </form>
+            <div>
+              <a href="https://www.instagram.com" aria-label="Link to instagram">
+                <i class="fa-brands fa-instagram"></i>
+                <p>Follow us on Instagram</p>
+                </a>
+            </div>
+          </div>
+        </footer>
+    </body>
+</html>
