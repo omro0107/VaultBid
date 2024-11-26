@@ -1,4 +1,9 @@
 {
+  "name": "vaultbid",
+  "version": "1.0.0",
+  "description": "A project for an auction house website",
+  "author": "Oda Rosenkilde <odaros00183@stud.noroff.no",
+  "license": "GNU GENERAL PUBLIC LICENSE",
   "devDependencies": {
     "@commitlint/config-conventional": "^19.6.0",
     "@eslint/js": "^9.15.0",
@@ -7,14 +12,29 @@
     "globals": "^15.12.0",
     "husky": "^9.1.7",
     "lint-staged": "^15.2.10",
-    "prettier": "3.3.3"
+    "prettier": "3.3.3",
+    "vite": "^6.0.0"
   },
   "scripts": {
-    "prepare": "husky"
+    "prepare": "husky",
+    "dev": "vite",
+    "build": "vite build",
+    "serve": "vite preview",
+    "lint": "eslint .",
+    "format": "prettier --write .",
+    "test": "echo \"No tests specified\" && exit 0",
+    "clean": "rimraf node_modules package-lock.json"
   },
   "lint-staged": {
-    "*.js": "prettier --write",
+    "*.js": [
+        "eslint --fix",
+        "prettier --write"
+    ],
     "*.html": "prettier --write",
     "*.md": "prettier --write"
+  },
+  "engines": {
+    "node": ">=14.x",
+    "npm": ">=6.x"
   }
 }
