@@ -12,8 +12,7 @@
     "globals": "^15.12.0",
     "husky": "^9.1.7",
     "lint-staged": "^15.2.10",
-    "prettier": "3.3.3",
-    "vite": "^6.0.0"
+    "prettier": "3.3.3"
   },
   "scripts": {
     "prepare": "husky",
@@ -27,8 +26,8 @@
   },
   "lint-staged": {
     "*.js": [
-        "eslint --fix",
-        "prettier --write"
+      "eslint --fix",
+      "prettier --write"
     ],
     "*.html": "prettier --write",
     "*.md": "prettier --write"
