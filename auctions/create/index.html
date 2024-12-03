@@ -11,6 +11,7 @@
         <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
         <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&family=Open+Sans:ital,wght@0,300..800;1,300..800&family=Playfair+Display:ital,wght@0,400..900;1,400..900&display=swap" rel="stylesheet">
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" integrity="sha512-z3gLpd7yknf1YoNbCzqRKc4qyor8gaKU1qmn+CShxbuBusANI9QpRohGBreCFkKxLhei6S9CQXFEbbKuqLg0DA==" crossorigin="anonymous" referrerpolicy="no-referrer">
+        <script type="module" src="../../src/js/app.js"></script>
     </head>
     <body>
         <header>
@@ -30,24 +31,26 @@
             </ul>
         </header>
         <main>
-          <h2 class="heading">Create new listing</h2>
-          <div id="list-item-form">
-              <form id="list-form">
-                  <label for="title">Title</label>
-                  <input type="text" id="title" name="title" required>
-                  <label for="item-description">Describe item</label>
-                  <textarea id="item-description" name="item-description" rows="8" required></textarea>
-                  <label for="image-url">Upload image</label>
-                  <input type="url" id="image-url" name="imageURL" placeholder="Enter image URL" required>
-                  <label for="image-alt-text">Image description</label>
-                  <input type="text" id="image-alt-text" name="imageAltText" placeholder="Describe the image content">
-                  <label for="date-time">Auction ending</label>
-                  <input type="datetime-local" id="date-time" name="dateTime" required>
-                  <label for="tags">Tags (comma-separated):</label>
-                  <input type="text" id="tags" name="tags" placeholder="e.g., art, vintage, collectible">
-                  <button type="submit">Create listing</button>
-              </form>
-          </div>
+          <section>
+            <h2 class="heading">Create new listing</h2>
+            <div id="list-item-form">
+                <form id="list-form">
+                    <label for="title">Title</label>
+                    <input type="text" id="title" name="title" required>
+                    <label for="item-description">Describe item</label>
+                    <textarea id="item-description" name="item-description" rows="8" required></textarea>
+                    <label for="image-url">Upload image</label>
+                    <input type="url" id="image-url" name="imageURL" placeholder="Enter image URL" required>
+                    <label for="image-alt-text">Image description</label>
+                    <input type="text" id="image-alt-text" name="imageAltText" placeholder="Describe the image content">
+                    <label for="date-time">Auction ending</label>
+                    <input type="datetime-local" id="date-time" name="dateTime" required>
+                    <label for="tags">Tags (comma-separated):</label>
+                    <input type="text" id="tags" name="tags" placeholder="e.g., art, vintage, collectible">
+                    <button type="submit">Create listing</button>
+                </form>
+            </div>
+          </section>
         </main>
         <footer> 
           <div class="footer-left">

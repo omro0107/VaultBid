@@ -11,26 +11,14 @@
         <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
         <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&family=Open+Sans:ital,wght@0,300..800;1,300..800&family=Playfair+Display:ital,wght@0,400..900;1,400..900&display=swap" rel="stylesheet">
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" integrity="sha512-z3gLpd7yknf1YoNbCzqRKc4qyor8gaKU1qmn+CShxbuBusANI9QpRohGBreCFkKxLhei6S9CQXFEbbKuqLg0DA==" crossorigin="anonymous" referrerpolicy="no-referrer">
+        <script type="module" src="../../src/js/app.js"></script>
     </head>
     <body>
         <header>
             <a href="index.html" aria-label="Home"><h1 class="logo">VAULTBID</h1></a>
-            <nav>
-                <ul>
-                    <li id="auctions"><a href="auctions.html" aria-label="Auctions">Auctions</a></li>
-                    <li id="list"><a href="create-listing.html" aria-label="List">List</a></li>
-                    <li id="profile"><a href="profile.html" aria-label="Profile">Profile</a></li>
-                    <li id="about"><a href="about.html" aria-label="About">About</a></li>
-                </ul>
-            </nav>
-            <ul>
-              <li><i class="fa-solid fa-magnifying-glass" id="search" aria-hidden="true"></i></li>
-              <li><i class="fa-solid fa-bag-shopping" id="holding" aria-hidden="true"></i></li>
-              <li><i class="fa-solid fa-right-from-bracket" id="logout" aria-hidden="true"></i></li>
-            </ul>
         </header>
         <main>
-          <div class="container">
+          <section class="container">
             <h2>Register new account</h2>
             <form id="register-form">
                 <label for="name">Name:</label>
@@ -47,7 +35,7 @@
             
                 <button type="submit">Register</button>
             </form>
-          </div>
+          </section>
         </main>
         <footer> 
           <div class="footer-left">
