@@ -1,13 +1,17 @@
 export function renderAllListings(listings) {
   const listingsContainer = document.getElementById('listing-display');
+  const thumbnailsContainer = document.getElementById('listings-thumbnails');
 
  
   listingsContainer.innerHTML = '';
+  thumbnailsContainer.innerHTML = '';
 
-  listings.forEach(listing => {
+  const latestListings = listings.slice(0, 6);
+  const remainingListings = listings.slice(6);
+
+  latestListings.forEach(listing => {
     const listingElement = document.createElement('div');
     listingElement.classList.add('listing-item');
-
     
     const titleElement = document.createElement('h3');
     titleElement.textContent = listing.title;
@@ -37,6 +41,33 @@ export function renderAllListings(listings) {
     listingElement.appendChild(bidsElement);
     listingElement.appendChild(endsAtElement);
 
+    listingElement.addEventListener('click', () => {
+      window.location.href = `../../../auctions/listing/index.html?id=${listing.id}`;
+    });
+
     listingsContainer.appendChild(listingElement);
+  });
+
+  remainingListings.forEach((listing) => {
+    const thumbnailElement = document.createElement('div');
+    thumbnailElement.classList.add('thumbnail-item');
+
+    const thumbnailImage = document.createElement('img');
+    if (listing.media.length > 0) {
+      thumbnailImage.src = listing.media[0].url;
+      thumbnailImage.alt = listing.media[0].alt;
+    }
+
+    const thumbnailTitle = document.createElement('p');
+    thumbnailTitle.textContent = listing.title;
+
+    thumbnailElement.appendChild(thumbnailImage);
+    thumbnailElement.appendChild(thumbnailTitle);
+
+    thumbnailElement.addEventListener('click', () => {
+      window.location.href = `../../../auctions/listing/index.html?id=${listing.id}`;
+    });
+
+    thumbnailsContainer.appendChild(thumbnailElement);
   });
 }
