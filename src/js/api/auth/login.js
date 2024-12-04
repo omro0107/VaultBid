@@ -1,5 +1,5 @@
-import { API_AUTH_LOGIN } from "../constants";
-import { headers } from "../headers";
+import { API_AUTH_LOGIN } from "../constants.js";
+import { headers } from "../headers.js";
 
 export async function login({ email, password }) {
   try {
@@ -15,16 +15,11 @@ export async function login({ email, password }) {
     const data = await response.json();
 
     if (!response.ok) {
-      document.getElementById("userError").innerHTML = `${data.errors[0].message}`;
+      document.getElementById("error-message").innerHTML = `${data.errors[0].message}`;
     }
     
     if (response.ok) {
-      document.getElementById(
-        "userSuccess"
-      ).innerHTML = `Successfully logged in. Redirected to Home page`;
-      setTimeout(() => {
-        window.location.href = "/";
-      });
+      window.location.href ="/";
     }
 
     localStorage.setItem("accessToken", `${data.data.accessToken}`);

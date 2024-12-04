@@ -22,4 +22,4 @@ export const API_AUCTION_SELECTED_POST = `${API_AUCTION}/listings/${fetchId}`;
 
 export const API_AUCTION_MY_LISTINGS = `${API_AUCTION_LISTINGS}/${localStorage.getItem(
   "userName"
-)}/posts`;
+)}/listings`;

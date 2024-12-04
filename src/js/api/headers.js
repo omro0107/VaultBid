@@ -1,5 +1,5 @@
-import { API_KEY } from "./constants";
-import { accessToken } from "./constants";
+import { API_KEY } from "../api/constants.js";
+import { accessToken } from "../api/constants.js";
 
 
 export function headers() {
