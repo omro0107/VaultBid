@@ -15,7 +15,7 @@
     </head>
     <body>
         <header>
-            <a href="index.html" aria-label="Home"><h1 class="logo">VAULTBID</h1></a>
+            <a href="/" aria-label="Home"><h1 class="logo">VAULTBID</h1></a>
             <nav>
                 <ul>
                     <li id="auctions"><a href="auctions.html" aria-label="Auctions">Auctions</a></li>
@@ -39,10 +39,15 @@
                     <input type="text" id="title" name="title" required>
                     <label for="item-description">Describe item</label>
                     <textarea id="item-description" name="item-description" rows="8" required></textarea>
-                    <label for="image-url">Upload image</label>
-                    <input type="url" id="image-url" name="imageURL" placeholder="Enter image URL" required>
-                    <label for="image-alt-text">Image description</label>
-                    <input type="text" id="image-alt-text" name="imageAltText" placeholder="Describe the image content">
+                    <label for="images">Upload images</label>
+                    <div id="image-upload-container">
+                        <div class="image-upload">
+                            <input type="url" name="imageURL" placeholder="Enter image URL" required>
+                            <input type="text" name="imageAltText" placeholder="Describe the image content">
+                            <button type="button" class="remove-image" aria-label="Remove image">Remove</button>
+                        </div>
+                    </div>
+                    <button type="button" id="add-image" aria-label="Add more images">Add more images</button>
                     <label for="date-time">Auction ending</label>
                     <input type="datetime-local" id="date-time" name="dateTime" required>
                     <label for="tags">Tags (comma-separated):</label>
