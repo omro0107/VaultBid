@@ -20,6 +20,8 @@ export const API_AUCTION_PROFILES = `${API_AUCTION}/profiles`;
 
 export const API_AUCTION_SELECTED_POST = `${API_AUCTION}/listings/${fetchId}`;
 
+export const API_AUCTION_BID = (listingId) => `${API_AUCTION_LISTINGS}/${listingId}/bids`;
+
 export const API_AUCTION_MY_LISTINGS = `${API_AUCTION_LISTINGS}/${localStorage.getItem(
   "userName"
 )}/listings`;

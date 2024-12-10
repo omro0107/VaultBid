@@ -1,10 +1,10 @@
-import { headers } from "../api/headers.js" ;
-import { API_AUCTION_LISTINGS } from "../api/constants.js";
+import { showMessage } from "../utilities/showMessage.js";
+import { placeBid } from "../api/listings/bid.js";
 
 export function renderSingleListing(listing) {
+  const isLoggedIn = !! localStorage.getItem("accessToken");
+
   const listingContainer = document.getElementById('single-listing-display'); 
-
-
   listingContainer.innerHTML = '';
 
   const titleElement = document.createElement('h2');
@@ -25,6 +25,21 @@ export function renderSingleListing(listing) {
   const bidsElement = document.createElement('p');
   bidsElement.textContent = `Number of Bids: ${listing._count.bids}`;
 
+  let highestBidAmount = 0;
+  if (listing.bids && listing.bids.length > 0) {
+    highestBidAmount = Math.max(...listing.bids.map(bid => bid.amount));
+  }
+
+  const highestBidElement = document.createElement('p');
+  if (highestBidAmount > 0) {
+    highestBidElement.textContent = `Current Highest Bid: $${highestBidAmount}`;
+  } else {
+    highestBidElement.textContent = 'Current Highest Bid: No bids placed yet.';
+  }
+
+  const sellerElement = document.createElement('p');
+  sellerElement.textContent = `Seller: ${listing.seller.name}`;
+
   const endsAtElement = document.createElement('p');
   endsAtElement.textContent = `Auction Ends At: ${new Date(listing.endsAt).toLocaleString()}`; 
 
@@ -33,64 +48,56 @@ export function renderSingleListing(listing) {
   listingContainer.appendChild(mediaElement);
   listingContainer.appendChild(tagsElement);
   listingContainer.appendChild(bidsElement);
+  listingContainer.appendChild(highestBidElement);
+  listingContainer.appendChild(sellerElement);
   listingContainer.appendChild(endsAtElement);
 
   const bidForm = document.createElement('form');
   bidForm.id = 'bid-form';
 
-  const bidLabel = document.createElement('label');
-  bidLabel.setAttribute('for', 'bid-amount');
-  bidLabel.textContent = 'Enter your bid amount:';
+  if (isLoggedIn) {
+    const bidLabel = document.createElement('label');
+    bidLabel.setAttribute('for', 'bid-amount');
+    bidLabel.textContent = 'Enter your bid amount:';
 
-  const bidInput = document.createElement('input');
-  bidInput.type = 'number';
-  bidInput.id = 'bid-amount';
-  bidInput.name = 'bidAmount';
-  bidInput.min = 1;
-  bidInput.required = true;
+    const bidInput = document.createElement('input');
+    bidInput.type = 'number';
+    bidInput.id = 'bid-amount';
+    bidInput.name = 'bidAmount';
+    bidInput.min = 1;
+    bidInput.required = true;
 
-  const bidButton = document.createElement('button');
-  bidButton.type = 'submit';
-  bidButton.textContent = 'Place Bid';
+    const bidButton = document.createElement('button');
+    bidButton.type = 'submit';
+    bidButton.textContent = 'Place Bid';
 
-  bidForm.appendChild(bidLabel);
-  bidForm.appendChild(bidInput);
-  bidForm.appendChild(bidButton);
-  listingContainer.appendChild(bidForm);
+    bidForm.appendChild(bidLabel);
+    bidForm.appendChild(bidInput);
+    bidForm.appendChild(bidButton);
+    listingContainer.appendChild(bidForm);
 
-  bidForm.addEventListener('submit', async (event) => {
-    event.preventDefault();
+    bidForm.addEventListener('submit', async (event) => {
+      event.preventDefault();
 
-    const bidAmount = parseFloat(bidInput.value);
+      const bidAmount = parseFloat(bidInput.value);
 
-    if (!bidAmount || bidAmount <= 0) {
-      alert('Please enter a valid bid amount.');
-      return;
-    }
-
-    try {
-      const response = await fetch(`${API_AUCTION_LISTINGS}/${listing.id}/bids`, {
-        method: 'POST',
-        headers: headers(),
-        body: JSON.stringify({ amount: bidAmount }),
-      });
-
-      if (!response.ok) {
-        throw new Error(`Failed to place bid. Status: ${response.status}`);
+      if (!bidAmount || bidAmount <= 0) {
+        showMessage('Please enter a valid bid amount.');
+        return;
       }
 
-      const result = await response.json();
-      alert('Bid placed successfully!');
-      console.log('Bid Response:', result);
+      console.log('Placing bid with amount:', bidAmount);
 
-      const updatedListing = await fetch(`${API_AUCTION_LISTINGS}/${listing.id}`);
-      const updatedData = await updatedListing.json();
-      renderSingleListing(updatedData.data);
-
-    } catch (error) {
-      console.error('Error placing bid:', error);
-      alert('Failed to place bid. Please try again.');
-    }
-  });
-
+      const updatedListingData = await placeBid(listing.id, bidAmount);
+      renderSingleListing(updatedListingData);
+    });
+  } else {
+    const messageElement = document.createElement('p');
+    messageElement.textContent = 'You must be logged in to place a bid. Please log in or register.';
+    listingContainer.appendChild(messageElement);
+    const loginLink = document.createElement('a');
+    loginLink.href = '/auth/login/index.html';
+    loginLink.textContent = 'Log in here';
+    listingContainer.appendChild(loginLink);
+  }
 }

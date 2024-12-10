@@ -13,18 +13,23 @@ document.addEventListener("DOMContentLoaded", async () => {
   
   try {
     const profileData = await readProfile(username);
-    console.log("Profile Data:", profileData); // Log the profile data
+    console.log("Profile Data:", profileData);
 
     if (profileData && profileData.data) {
-      
-      displayUser  ();
+      localStorage.setItem("myUserData", JSON.stringify(profileData));
+      displayUser (profileData.data);
     } else {
-      console.error("Failed to fetch user profile data:", profileData);
+        console.error("Failed to fetch user profile data:", profileData);
     }
   } catch (error) {
-    console.error("Error fetching profile data:", error);
+    handleError(error);
   }
 
   setLogoutListener();
   setupUpdateProfileModal(); 
 });
+
+function handleError(error) {
+  console.error("Error fetching profile data:", error);
+  alert('An error occurred while fetching profile data. Please try again.');
+}
