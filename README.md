@@ -12,7 +12,6 @@ This website is for a auctionhouse. First, I designed the website using FIGMA, a
 ## Site architecture
 - Home
 - Profile
-- Auction listings
 - Single listing
 - Create listing
 - Login

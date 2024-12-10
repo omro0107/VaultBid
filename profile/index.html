@@ -11,10 +11,11 @@
         <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
         <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&family=Open+Sans:ital,wght@0,300..800;1,300..800&family=Playfair+Display:ital,wght@0,400..900;1,400..900&display=swap" rel="stylesheet">
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" integrity="sha512-z3gLpd7yknf1YoNbCzqRKc4qyor8gaKU1qmn+CShxbuBusANI9QpRohGBreCFkKxLhei6S9CQXFEbbKuqLg0DA==" crossorigin="anonymous" referrerpolicy="no-referrer">
+        <script type="module" src="../src/js/views/profile.js"></script>
     </head>
     <body>
         <header>
-            <a href="index.html" aria-label="Home"><h1 class="logo">VAULTBID</h1></a>
+            <a href="/" aria-label="Home"><h1 class="logo">VAULTBID</h1></a>
             <nav>
                 <ul>
                     <li id="auctions"><a href="auctions.html" aria-label="Auctions">Auctions</a></li>
@@ -25,30 +26,39 @@
             </nav>
             <ul>
               <li><i class="fa-solid fa-magnifying-glass" id="search" aria-hidden="true"></i></li>
-              <li><i class="fa-solid fa-bag-shopping" id="holding" aria-hidden="true"></i></li>
-              <li><i class="fa-solid fa-right-from-bracket" id="logout" aria-hidden="true"></i></li>
+              <li><i class="fa-solid fa-right-from-bracket" id="logout-btn" aria-hidden="true"></i></li>
+              <li><i class="fa-solid fa-right-to-bracket" id="login-btn" aria-hidden="true"></i></li>
+              <li><i class="fa-regular fa-pen-to-square" id="register-btn" aria-hidden="true"></i></li>
             </ul>
         </header>
         <main>
-          <div class="container">
-            <h2>Login to your account</h2>
-            <form id="login-form">
-                <label for="email">Email</label>
-                <input type="text" id="login-email" name="email" required autocomplete="email">
-                <label for="password">Password</label>
-                <input type="password" id="password" name="password" required>
-                <button type="submit">Login</button>
-                <div class="createaccount">
-                    <p>Not registered?</p>
-                    <a href="../account/register.html" aria-label="Register">Create an account</a>
-                </div>
-                <p id="error-message"></p>
-            </form>
-        </div>
+          <div id="userProfile"></div>
+          <button id="open-update-profile">Update Profile</button>
+          <div id="update-profile-modal" class="modal" style="display: none;">
+            <div class="modal-content">
+                <span class="close-modal">&times;</span>
+                <h2>Update Profile</h2>
+                <form id="updateProfile">
+                    <div>
+                        <label for="avatar">Avatar URL:</label>
+                        <input type="url" id="avatar" name="avatar" placeholder="Enter new avatar URL">
+                    </div>
+                    <div>
+                        <label for="bio">Bio:</label>
+                        <textarea id="bio" name="bio" placeholder="Tell us about yourself"></textarea>
+                    </div>
+                    <button type="submit">Save Changes</button>
+                </form>
+            </div>
+          </div>
+          <div id="current-holding"></div>
+          <section>
+            <div id="listings-thumbnails"></div>
+          </section>
         </main>
         <footer> 
           <div class="footer-left">
-            <div class="address">                        
+            <div class="address">                       
                 <a href="#" aria-label="Home"><h4>VAULTBID</h4></a>
                 <ul>
                   <li>VaultBid HQ</li>
