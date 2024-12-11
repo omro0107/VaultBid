@@ -1,11 +1,21 @@
-/* IF NEEDED: FONT ALREADY ADDED IN HEAD AS <link>
-// <uniquifier>: Use a unique and descriptive class name
-// <weight>: Use a value from 400 to 900
+@layer components {
+  .btn {
+    @apply font-bold py-2 px-4 rounded;
+  }
 
-.playfair-display-<uniquifier> {
-  font-family: "Playfair Display", serif;
-  font-optical-sizing: auto;
-  font-weight: <weight>;
-  font-style: normal;
+  .btn-primary {
+    @apply bg-accent text-white hover:bg-brand-dark;
+  }
+
+  .btn-secondary {
+    @apply bg-brand-dark text-white;
+  }
 }
+
 /*
+
+add this to relevamt html:
+<button class="btn btn-primary">Primary Button</button>
+<button class="btn btn-secondary">Secondary Button</button>
+
+*/

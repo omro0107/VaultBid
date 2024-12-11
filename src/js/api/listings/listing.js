@@ -47,9 +47,7 @@ export async function displayAllListings(page = 1) {
   try {
     const resultJson = await fetchListings(page);
     const listings = resultJson.data; 
-
-    listings.sort((a, b) => new Date(b.created) - new Date(a.created));
-
+    
     renderListings(listings);
   } catch (error) {
     console.error('Error fetching all listings:', error);

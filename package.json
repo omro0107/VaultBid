@@ -17,9 +17,8 @@
   },
   "scripts": {
     "prepare": "husky",
-    "dev": "vite",
-    "build": "vite build",
-    "serve": "vite preview",
+    "dev": "npx tailwindcss -i ./css/input.css -o ./css/style.css --watch",
+    "build": "npx tailwindcss -i ./css/input.css -o ./css/style.css --minify",
     "lint": "eslint .",
     "format": "prettier --write .",
     "test": "echo \"No tests specified\" && exit 0",
