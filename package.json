@@ -17,8 +17,8 @@
   },
   "scripts": {
     "prepare": "husky",
-    "dev": "npx tailwindcss -i ./css/input.css -o ./css/style.css --watch",
-    "build": "npx tailwindcss -i ./css/input.css -o ./css/style.css --minify",
+    "dev": "npx tailwindcss -i src/css/input.css -o src/css/style.css --watch",
+    "build": "npx tailwindcss -i src/css/input.css -o src/css/style.css --minify",
     "lint": "eslint .",
     "format": "prettier --write .",
     "test": "echo \"No tests specified\" && exit 0",

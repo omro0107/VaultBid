@@ -29,6 +29,14 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   }
 
+  const registerIcon = document.getElementById("register-btn");
+
+  if (registerIcon) {
+    registerIcon.addEventListener("click", () => {
+      window.location.href = "../../../auth/register/index.html";
+    });
+  }
+
   const searchButton = document.getElementById("search-button");
   const searchInput = document.getElementById("search-input");
 
