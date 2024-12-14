@@ -6,23 +6,39 @@ export function renderSingleListing(listing) {
 
   const listingContainer = document.getElementById('single-listing-display'); 
   listingContainer.innerHTML = '';
+  listingContainer.className = 'flex p-4';
+
+  const mediaContainer = document.createElement('div');
+  mediaContainer.className = 'flex-shrink-0 mr-4';
+
+  if (listing.media.length > 0) {
+    listing.media.forEach(media => {
+      const mediaElement = document.createElement('img');
+      mediaElement.src = media.url;
+      mediaElement.alt = media.alt;
+      mediaElement.className = 'w-48 h-auto mb-2';
+      mediaContainer.appendChild(mediaElement);
+    });
+  }
+  listingContainer.appendChild(mediaContainer);
+
+  const contentContainer = document.createElement('div');
+  contentContainer.className = 'flex flex-col';
 
   const titleElement = document.createElement('h2');
+  titleElement.className = 'text-lg font-semibold mb-2';
   titleElement.textContent = listing.title;
 
   const descriptionElement = document.createElement('p');
+  descriptionElement.className = 'mb-4';
   descriptionElement.textContent = listing.description;
 
-  const mediaElement = document.createElement('img');
-  if (listing.media.length > 0) {
-    mediaElement.src = listing.media[0].url;
-    mediaElement.alt = listing.media[0].alt;
-  }
-
   const tagsElement = document.createElement('p');
+  tagsElement.className = 'text-sm mb-2';
   tagsElement.textContent = 'Tags: ' + listing.tags.join(', ');
 
   const bidsElement = document.createElement('p');
+  bidsElement.className = 'text-sm mb-2';
   bidsElement.textContent = `Number of Bids: ${listing._count.bids}`;
 
   let highestBidAmount = 0;
@@ -31,6 +47,7 @@ export function renderSingleListing(listing) {
   }
 
   const highestBidElement = document.createElement('p');
+  highestBidElement.className = 'text-lg font-semibold mb-4';
   if (highestBidAmount > 0) {
     highestBidElement.textContent = `Current Highest Bid: $${highestBidAmount}`;
   } else {
@@ -38,6 +55,7 @@ export function renderSingleListing(listing) {
   }
 
   const sellerElement = document.createElement('p');
+  sellerElement.className = 'text-sm mb-2';
 if (listing.seller && listing.seller.name) {
     sellerElement.textContent = `Seller: ${listing.seller.name}`;
 } else {
@@ -45,23 +63,25 @@ if (listing.seller && listing.seller.name) {
 }
 
   const endsAtElement = document.createElement('p');
+  endsAtElement.className = 'text-sm mb-4';
   endsAtElement.textContent = `Auction Ends At: ${new Date(listing.endsAt).toLocaleString()}`; 
 
-  listingContainer.appendChild(titleElement);
-  listingContainer.appendChild(descriptionElement);
-  listingContainer.appendChild(mediaElement);
-  listingContainer.appendChild(tagsElement);
-  listingContainer.appendChild(bidsElement);
-  listingContainer.appendChild(highestBidElement);
-  listingContainer.appendChild(sellerElement);
-  listingContainer.appendChild(endsAtElement);
+  contentContainer.appendChild(titleElement);
+  contentContainer.appendChild(descriptionElement);
+  contentContainer.appendChild(tagsElement);
+  contentContainer.appendChild(bidsElement);
+  contentContainer.appendChild(highestBidElement);
+  contentContainer.appendChild(sellerElement);
+  contentContainer.appendChild(endsAtElement);
 
   const bidForm = document.createElement('form');
   bidForm.id = 'bid-form';
+  bidForm.className = 'mt-4';
 
   if (isLoggedIn) {
     const bidLabel = document.createElement('label');
     bidLabel.setAttribute('for', 'bid-amount');
+    bidLabel.className = 'mb-2';
     bidLabel.textContent = 'Enter your bid amount:';
 
     const bidInput = document.createElement('input');
@@ -70,15 +90,17 @@ if (listing.seller && listing.seller.name) {
     bidInput.name = 'bidAmount';
     bidInput.min = 1;
     bidInput.required = true;
+    bidInput.className = 'border rounded p-2 mb-2';
 
     const bidButton = document.createElement('button');
     bidButton.type = 'submit';
+    bidButton.className = 'bg-brand-dark text-white rounded p-2 hover:bg-accent';
     bidButton.textContent = 'Place Bid';
 
     bidForm.appendChild(bidLabel);
     bidForm.appendChild(bidInput);
     bidForm.appendChild(bidButton);
-    listingContainer.appendChild(bidForm);
+    contentContainer.appendChild(bidForm);
 
     bidForm.addEventListener('submit', async (event) => {
       event.preventDefault();
@@ -98,10 +120,11 @@ if (listing.seller && listing.seller.name) {
   } else {
     const messageElement = document.createElement('p');
     messageElement.textContent = 'You must be logged in to place a bid. Please log in or register.';
-    listingContainer.appendChild(messageElement);
+    contentContainer.appendChild(messageElement);
     const loginLink = document.createElement('a');
     loginLink.href = '/auth/login/index.html';
     loginLink.textContent = 'Log in here';
-    listingContainer.appendChild(loginLink);
+    contentContainer.appendChild(loginLink);
   }
+  listingContainer.appendChild(contentContainer);
 }

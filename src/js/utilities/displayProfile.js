@@ -2,6 +2,9 @@ export function displayUser (userData) {
   const userProfileContainer = document.getElementById("userProfile");
 
   try {
+
+    console.log("User  Data:", userData);
+    
       if (!userData || !userData.avatar || !userData._count) {
           console.error("User  data is incomplete:", userData);
           return;
@@ -10,7 +13,6 @@ export function displayUser (userData) {
       userProfileContainer.innerHTML = '';
 
       const profileContainer = document.createElement("div");
-      profileContainer.className = "flex items-center";
 
       const avatarImg = createAvatar(userData.avatar.url);
       const userInfoContainer = createUserInfo(userData);

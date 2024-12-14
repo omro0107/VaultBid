@@ -21,11 +21,44 @@ if (accessToken) {
 }
 
 document.addEventListener("DOMContentLoaded", () => {
+  const searchIcon = document.getElementById("search");
+  const searchInputContainer = document.getElementById("search-input-container");
+  const headerSearchInput = document.getElementById("header-search-input");
+
+  searchIcon.addEventListener("click", () => {
+    searchInputContainer.classList.toggle("hidden");
+    headerSearchInput.focus();
+  });
+
+  document.addEventListener("click", (event) => {
+    if (!searchIcon.contains(event.target) && !searchInputContainer.contains(event.target)) {
+      searchInputContainer.classList.add("hidden");
+    }
+  });
+
+  searchIcon.addEventListener("click", () => {
+    const query = headerSearchInput.value.trim();
+    if (query) {
+      console.log("Searching for:", query);
+      searchListings(query, currentPage);
+    }
+  });
+
+  headerSearchInput.addEventListener("keypress", (event) => {
+    if (event.key === 'Enter') {
+      const query = headerSearchInput.value.trim();
+      if (query) {
+        console.log("Searching for:", query);
+        searchListings(query, currentPage);
+      }
+    }
+  });
+
   const loginIcon = document.getElementById("login-btn");
 
   if (loginIcon) {
     loginIcon.addEventListener("click", () => {
-      window.location.href = "../../../auth/login/index.html";
+      window.location.href = "../../../auth/login/";
     });
   }
 
@@ -33,12 +66,13 @@ document.addEventListener("DOMContentLoaded", () => {
 
   if (registerIcon) {
     registerIcon.addEventListener("click", () => {
-      window.location.href = "../../../auth/register/index.html";
+      window.location.href = "../../../auth/register/";
     });
   }
 
   const searchButton = document.getElementById("search-button");
   const searchInput = document.getElementById("search-input");
+  
 
   searchButton.addEventListener("click", () => {
     const query = searchInput.value.trim();
@@ -81,3 +115,4 @@ document.addEventListener("DOMContentLoaded", () => {
   loadListings(currentPage);
   setLogoutListener();
 });
+

@@ -31,7 +31,7 @@
   }
 
   img {
-    @apply rounded-lg shadow-md; /* Tailwind utilities */
-    border: 2px solid #ccc; /* Custom border */
+    @apply rounded-lg shadow-md;
+    border: 2px solid #ccc;
   }
 }
