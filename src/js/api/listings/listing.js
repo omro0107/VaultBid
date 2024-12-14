@@ -2,6 +2,7 @@ import { headers } from '../headers.js';
 import { API_AUCTION_LISTINGS, API_AUCTION_MY_LISTINGS } from '../constants.js';
 import { renderListings } from '../../utilities/displayListings.js'
 import { fetchListings } from '../listings/allListings.js';
+import { showMessage } from '../../utilities/showMessage.js';
 
 export async function displaySingleListing() {
   const pageId = new URLSearchParams(window.location.search).get("id");
@@ -39,7 +40,7 @@ export async function displayMyListings() {
     renderListings(listingObjects) 
   } catch (error) {
     console.error('Error fetching listings:', error);
-    displayError('Failed to load your listings. Please try again later.');
+    showMessage('Failed to load your listings. Please try again later.');
   }
 }
 
@@ -53,11 +54,4 @@ export async function displayAllListings(page = 1) {
     console.error('Error fetching all listings:', error);
     alert('Failed to load listings. Please try again later.');
   }
-}
-
-export function displayError(message) {
-  const errorMessage = document.createElement('p');
-  errorMessage.textContent = message;
-  errorMessage.className = 'text-red-500';
-  document.querySelector('.error-message').appendChild(errorMessage);
 }

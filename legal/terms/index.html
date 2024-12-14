@@ -10,44 +10,48 @@
         <link rel="preconnect" href="https://fonts.googleapis.com">
         <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
         <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400..900;1,400..900&display=swap" rel="stylesheet">
-                <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" integrity="sha512-z3gLpd7yknf1YoNbCzqRKc4qyor8gaKU1qmn+CShxbuBusANI9QpRohGBreCFkKxLhei6S9CQXFEbbKuqLg0DA==" crossorigin="anonymous" referrerpolicy="no-referrer">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" integrity="sha512-z3gLpd7yknf1YoNbCzqRKc4qyor8gaKU1qmn+CShxbuBusANI9QpRohGBreCFkKxLhei6S9CQXFEbbKuqLg0DA==" crossorigin="anonymous" referrerpolicy="no-referrer">
+        <link rel="stylesheet" href="../../src/css/style.css" />
     </head>
-    <body>
-      <header>
-        <a href="/" aria-label="Home"><h1 class="logo">VAULTBID</h1></a>
-        <nav>
-            <ul>
-                <li id="list"><a href="../../auctions/create/" aria-label="List">List Item</a></li>
-                <li id="profile"><a href="../../profile/" aria-label="Profile">Profile</a></li>
-                <li id="about"><a href="../../about/" aria-label="About">About</a></li>
-                <li id="contact"><a href="../../contact/" aria-label="Contact">Contact</a></li>
-            </ul>
+    <body class="bg-brand font-body text-brand-dark">
+      <header class="flex justify-between items-center p-4">
+        <a href="/" aria-label="Home"><h1 class="text-xl">VAULTBID</h1></a>
+        <button id="menu-toggle" class="md:hidden focus:outline-none">
+          <i class="fas fa-bars"></i>
+        </button>
+        <nav class="hidden md:flex">
+          <ul class="flex">
+              <li id="list" class="p-2"><a href="../../auctions/create/" aria-label="List">List Item</a></li>
+              <li id="profile" class="p-2"><a href="../../profile/" aria-label="Profile">Profile</a></li>
+              <li id="about" class="p-2"><a href="../../about/" aria-label="About">About</a></li>
+              <li id="contact" class="p-2"><a href="../../contact/" aria-label="Contact">Contact</a></li>
+          </ul>
         </nav>
-        <ul>
-          <li><i class="fa-solid fa-magnifying-glass" id="search" aria-hidden="true"></i></li>
-          <li><i class="fa-solid fa-right-from-bracket" id="logout-btn" aria-hidden="true"></i></li>
-          <li><i class="fa-solid fa-right-to-bracket" id="login-btn" aria-hidden="true"></i></li>
-          <li><i class="fa-regular fa-pen-to-square" id="register-btn" aria-hidden="true"></i></li>
+        <ul class="flex">
+          <li id="search" class="p-2"><i class="fa-solid fa-magnifying-glass" aria-hidden="true"></i></li>
+          <li id="logout-btn"  class="p-2"><i class="fa-solid fa-right-from-bracket" aria-hidden="true"></i></li>
+          <li id="login-btn" class="p-2"><i class="fa-solid fa-right-to-bracket" aria-hidden="true"></i></li>
+          <li id="register-btn" class="p-2"><i class="fa-regular fa-pen-to-square" aria-hidden="true"></i></li>
         </ul>
       </header>
-      <main>
-        <section>
-          <h2>Terms and Conditions for VaultBid AS</h2>
+      <main class="m-3">
+        <section class="py-2">
+          <h2 class="text-lg font-semibold">Terms and Conditions for VaultBid AS</h2>
           <p>Welcome to VaultBid AS. By using our services, you agree to be bound by the following terms and conditions. Please read them carefully before participating in our auctions or using our platform.</p>
         </section>
         
-        <section>
-          <h3>General Information</h3>
+        <section class="py-2">
+          <h3 class="font-semibold">General Information</h3>
           <p>VaultBid AS, founded in 2003 and based in Oslo, provides a global auction platform for buying and selling art, design, collectibles, and other valuable items. We prioritize transparency and trust, aiming to deliver a secure and efficient trading experience.</p>
         </section>
         
-        <section>
-          <h3>Acceptance of Terms</h3>
+        <section class="py-2">
+          <h3 class="font-semibold">Acceptance of Terms</h3>
           <p>By registering an account or participating in auctions on VaultBid, you confirm that you have read, understood, and agree to these terms. If you do not accept the terms, you may not use our services.</p>
         </section>
         
-        <section>
-          <h3>Registration and Account</h3>
+        <section class="py-2">
+          <h3 class="font-semibold">Registration and Account</h3>
           <ul>
             <li>All users must be at least 18 years old to create an account.</li>
             <li>The information you provide during registration must be accurate and up to date.</li>
@@ -55,8 +59,8 @@
           </ul>
         </section>
 
-        <section>
-          <h3>Selling on VaultBid</h3>
+        <section class="py-2">
+          <h3 class="font-semibold">Selling on VaultBid</h3>
           <ul>
             <li>Sellers must provide accurate descriptions and images of the items they wish to sell.</li>
             <li>VaultBid reserves the right to reject or remove items that do not meet our standards.</li>
@@ -64,8 +68,8 @@
           </ul>
         </section>
         
-        <section>
-          <h3>Buying on VaultBid</h3>
+        <section class="py-2">
+          <h3 class="font-semibold">Buying on VaultBid</h3>
             <ul>
               <li>All bids are binding. By placing a bid, you commit to purchasing the item if you win.</li>
               <li>Payment must be completed within the specified timeframe after the auction closes.</li>
@@ -73,40 +77,40 @@
           </ul>
         </section>
         
-        <section>
-          <h3>Fees and Charges</h3>
+        <section class="py-2">
+          <h3 class="font-semibold">Fees and Charges</h3>
           <p>VaultBid charges commissions and fees for our services. These vary depending on the sale amount and item type. Details of fees are clearly stated before the auction begins.</p>
         </section>
         
-        <section>
-          <h3>User Conduct</h3>
+        <section class="py-2">
+          <h3 class="font-semibold">User Conduct</h3>
             <ul>
               <li>Users must act professionally and respectfully on the platform.</li>
               <li>Attempting to circumvent our fees or engaging in illegal activities on the platform is strictly prohibited.</li>
           </ul>
         </section>
         
-        <section>
-          <h3>Disclaimer of Liability</h3>
+        <section class="py-2">
+          <h3 class="font-semibold">Disclaimer of Liability</h3>
           <p>VaultBid is not responsible for losses, damages, or disputes between users. We act as an intermediary and do not guarantee the authenticity or quality of auctioned items.</p>
         </section>
         
-        <section>
-          <h3>Account Termination</h3>
+        <section class="py-2">
+          <h3 class="font-semibold">Account Termination</h3>
           <p>VaultBid reserves the right to suspend or terminate accounts that violate our terms without prior notice.</p>
         </section>
         
-        <section>
-          <h3>Changes to the Terms</h3>
+        <section class="py-2">
+          <h3 class="font-semibold">Changes to the Terms</h3>
           <p>VaultBid reserves the right to update these terms at any time. Any changes will be communicated on our platform, and continued use of our services indicates acceptance of the updated terms.</p>
         
-          <p>These terms were last updated on Dec. 5, 2024.</p>
+          <p class="font-medium">These terms were last updated on Dec. 5, 2024.</p>
         </section>
       </main>
-      <footer> 
-        <div class="footer-left">
-          <div class="address">                        
-              <a href="/" aria-label="Home"><h4>VAULTBID</h4></a>
+      <footer class="m-3 flex flex-wrap justify-between items-start"> 
+        <div class="p-4">
+          <div class="pb-2">                        
+              <a href="/" aria-label="Home"><h4 class="pb-2">VAULTBID</h4></a>
               <ul>
                 <li>VaultBid HQ</li>
                 <li>Dronning Eufemias gate 125</li>
@@ -116,21 +120,21 @@
           </div>
           <p>&copy; 2024 Vaultbid Group AS</p>
         </div>
-        <ul class="support">
+        <ul class="p-4 flex flex-col justify-center">
             <li><a href="../terms/" aria-label="terms and conditions">Terms &amp; Conditions</a></li>
             <li><a href="../privacy/" aria-label="privacy policy">Privacy policy</a></li>
             <li><a href="../../contact/" aria-label="contact">Contact us</a></li>
         </ul>
-        <div class="footer-right">
-          <form id="newsletter" class="newsletter-form">
-            <label for="email">Stay up-to-date with our auctions</label>
-            <input name="email" type="email" id="email" placeholder="Enter your e-mail">
-            <button class="subscribe-button" type="button">Subscribe</button>
+        <div class="p-4 flex flex-col">
+          <form id="newsletter" class="flex flex-col">
+            <label for="email" class="pb-2">Stay up-to-date with our auctions</label>
+            <input name="email" type="email" id="email" placeholder="Enter your e-mail" class="rounded p-2">
+            <button class="subscribe-button bg-brand-dark text-white rounded p-2" type="button">Subscribe</button>
           </form>
           <div>
-            <a href="https://www.instagram.com" aria-label="Link to instagram">
-              <i class="fa-brands fa-instagram"></i>
-              <p>Follow us on Instagram</p>
+            <a href="https://www.instagram.com" aria-label="Link to instagram" class="flex flex-row">
+              <i class="fa-brands fa-instagram p-2"></i>
+              <p class="p-2">Follow us on Instagram</p>
               </a>
           </div>
         </div>

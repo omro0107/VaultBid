@@ -1,6 +1,6 @@
 import { accessToken } from "../api/constants.js";
 import { setLogoutListener } from "../ui/globals/logout.js";
-import { displayError } from "../api/listings/listing.js";
+import { showMessage } from "../utilities/showMessage.js";
 import { fetchListings } from "../api/listings/allListings.js";
 import { renderListings, updatePaginationControls } from "../utilities/displayListings.js";
 import { setupPagination } from "../utilities/pagination.js";
@@ -72,7 +72,7 @@ async function loadListings(page = 1) {
     updatePaginationControls(currentPage, totalPages);
   } catch (error) {
     console.error('Failed to load listings:', error);
-    displayError('Failed to load listings. Please try again later.');
+    showMessage('Failed to load listings. Please try again later.');
   }
 }
 

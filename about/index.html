@@ -1,81 +1,88 @@
 <!DOCTYPE html>
 <html lang="en">
-    <head>
-        <meta charset="utf-8">
-        <meta name="description" content="Your search for art, design, collectibles, and hidden gems starts here!">
-        <meta name="viewport" content="width=device-width, initial-scale=1">
-        <title>Home</title>
-        <link rel="icon" type="image/png" sizes="32x32" href="/public/favicon_io/favicon-32x32.png">
-        <link rel="icon" type="image/png" sizes="16x16" href="/public/favicon_io/favicon-16x16.png">
-        <link rel="preconnect" href="https://fonts.googleapis.com">
-        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-        <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400..900;1,400..900&display=swap" rel="stylesheet">
-        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" integrity="sha512-z3gLpd7yknf1YoNbCzqRKc4qyor8gaKU1qmn+CShxbuBusANI9QpRohGBreCFkKxLhei6S9CQXFEbbKuqLg0DA==" crossorigin="anonymous" referrerpolicy="no-referrer">
-    </head>
-    <body>
-        <header>
-          <a href="/" aria-label="Home"><h1 class="logo">VAULTBID</h1></a>
-          <nav>
+  <head>
+    <meta charset="utf-8">
+    <meta name="description" content="Your search for art, design, collectibles, and hidden gems starts here!">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Home</title>
+    <link rel="icon" type="image/png" sizes="32x32" href="/public/favicon_io/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/public/favicon_io/favicon-16x16.png">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400..900;1,400..900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" integrity="sha512-z3gLpd7yknf1YoNbCzqRKc4qyor8gaKU1qmn+CShxbuBusANI9QpRohGBreCFkKxLhei6S9CQXFEbbKuqLg0DA==" crossorigin="anonymous" referrerpolicy="no-referrer">
+    <link rel="stylesheet" href="../src/css/style.css"/>
+  </head>
+    <body class="bg-brand font-body text-brand-dark">
+      <header class="flex justify-between items-center p-4">
+        <a href="/" aria-label="Home"><h1 class="text-xl">VAULTBID</h1></a>
+        <button id="menu-toggle" class="md:hidden focus:outline-none">
+          <i class="fas fa-bars"></i>
+        </button>
+        <nav class="hidden md:flex">
+          <ul class="flex">
+            <li id="list" class="p-2"><a href="../../auctions/create/" aria-label="List">List Item</a></li>
+            <li id="profile" class="p-2"><a href="../../profile/" aria-label="Profile">Profile</a></li>
+            <li id="about" class="p-2"><a href="../about/" aria-label="About">About</a></li>
+            <li id="contact" class="p-2"><a href="../../contact/" aria-label="Contact">Contact</a></li>
+          </ul>
+        </nav>
+        <ul class="flex">
+          <li id="search" class="p-2"><i class="fa-solid fa-magnifying-glass" aria-hidden="true"></i></li>
+          <li id="logout-btn"  class="p-2"><i class="fa-solid fa-right-from-bracket" aria-hidden="true"></i></li>
+          <li id="login-btn" class="p-2"><i class="fa-solid fa-right-to-bracket" aria-hidden="true"></i></li>
+          <li id="register-btn" class="p-2"><i class="fa-regular fa-pen-to-square"  aria-hidden="true"></i></li>
+        </ul>
+      </header>
+      <main class="m-3">
+        <section class="py-2">
+          <div>
+            <img src="../public/images/chris-bair-S8FOtAmjJYY-unsplash-min.jpg" alt="A collection of books and a camera (for styling purpose)" class="max-w-full h-auto rounded-lg shadow-md">
+            <h2 class="font-semibold text-lg">About us</h2>
+          </div>
+          <p class="py-2">VaultBid is a premier auction platform founded in 2003 and headquartered in Oslo. We connect a global community of buyers and sellers, offering a seamless space to trade unique and valuable items. With a focus on transparency and trust, VaultBid has become the go-to destination for art, design, collectibles, and beyond.</p>
+        </section>
+        <section class="py-2">
+          <h3 class="font-semibold">The Story of Vaultbid</h3>
+          <h4 class="font-semibold">EST. 2003</h4>
+          <p class="py-2">Our journey began in Oslo with a vision to revolutionize the auction experience. Since day one, VaultBid has been dedicated to empowering individuals to share their treasures with the world. Over the years, we’ve grown from a local platform to an international marketplace, building a reputation for quality, innovation, and integrity.</p>
+        </section>
+        <section class="py-2">
+          <h5 class="font-semibold">Our Culture</h5>
+          <p class="py2">At VaultBid, we believe in the power of community and connection. We’re driven by a passion for discovery, a commitment to sustainability, and a dedication to fostering meaningful exchanges. Whether you're a seasoned collector or a curious newcomer, our platform is designed to inspire, engage, and support you every step of the way.</p>
+        </section>
+      </main>
+      <footer class="m-3 flex flex-wrap justify-between items-start"> 
+        <div class="p-4">
+          <div class="pb-2">                        
+              <a href="/" aria-label="Home"><h4 class="pb-2">VAULTBID</h4></a>
               <ul>
-                  <li id="list"><a href="../../auctions/create/" aria-label="List">List Item</a></li>
-                  <li id="profile"><a href="../../profile/" aria-label="Profile">Profile</a></li>
-                  <li id="about"><a href="../about/" aria-label="About">About</a></li>
-                  <li id="contact"><a href="../../contact/" aria-label="Contact">Contact</a></li>
+                <li>VaultBid HQ</li>
+                <li>Dronning Eufemias gate 125</li>
+                <li>BOX 7362</li>
+                <li>0191 Oslo</li>
               </ul>
-          </nav>
-          <ul>
-            <li><i class="fa-solid fa-magnifying-glass" id="search" aria-hidden="true"></i></li>
-            <li><i class="fa-solid fa-right-from-bracket" id="logout-btn" aria-hidden="true"></i></li>
-            <li><i class="fa-solid fa-right-to-bracket" id="login-btn" aria-hidden="true"></i></li>
-            <li><i class="fa-regular fa-pen-to-square" id="register-btn" aria-hidden="true"></i></li>
-          </ul>
-        </header>
-        <main>
-          <section>
-            <div class="container"><h2>About us</h2></div>
-            <p>VaultBid is a premier auction platform founded in 2003 and headquartered in Oslo. We connect a global community of buyers and sellers, offering a seamless space to trade unique and valuable items. With a focus on transparency and trust, VaultBid has become the go-to destination for art, design, collectibles, and beyond.</p>
-          </section>
-          <section>
-            <h3>The Story of Vaultbid</h3>
-            <h4>EST. 2003</h4>
-            <p>Our journey began in Oslo with a vision to revolutionize the auction experience. Since day one, VaultBid has been dedicated to empowering individuals to share their treasures with the world. Over the years, we’ve grown from a local platform to an international marketplace, building a reputation for quality, innovation, and integrity.</p>
-          </section>
-          <section>
-            <h5>Our Culture</h5>
-            <p>At VaultBid, we believe in the power of community and connection. We’re driven by a passion for discovery, a commitment to sustainability, and a dedication to fostering meaningful exchanges. Whether you're a seasoned collector or a curious newcomer, our platform is designed to inspire, engage, and support you every step of the way.</p>
-          </section>
-        </main>
-        <footer> 
-          <div class="footer-left">
-            <div class="address">                        
-                <a href="/" aria-label="Home"><h4>VAULTBID</h4></a>
-                <ul>
-                  <li>VaultBid HQ</li>
-                  <li>Dronning Eufemias gate 125</li>
-                  <li>BOX 7362</li>
-                  <li>0191 Oslo</li>
-                </ul>
-            </div>
-            <p>&copy; 2024 Vaultbid Group AS</p>
           </div>
-          <ul class="support">
-              <li><a href="../legal/terms/" aria-label="terms and conditions">Terms &amp; Conditions</a></li>
-              <li><a href="../legal/privacy/" aria-label="privacy policy">Privacy policy</a></li>
-              <li><a href="../contact/" aria-label="contact">Contact us</a></li>
-          </ul>
-          <div class="footer-right">
-            <form id="newsletter" class="newsletter-form">
-              <label for="email">Stay up-to-date with our auctions</label>
-              <input name="email" type="email" id="email" placeholder="Enter your e-mail">
-              <button class="subscribe-button" type="button">Subscribe</button>
-            </form>
-            <div>
-              <a href="https://www.instagram.com" aria-label="Link to instagram">
-                <i class="fa-brands fa-instagram"></i>
-                <p>Follow us on Instagram</p>
-                </a>
-            </div>
+          <p>&copy; 2024 Vaultbid Group AS</p>
+        </div>
+        <ul class="p-4 flex flex-col justify-center">
+            <li><a href="../legal/terms/" aria-label="terms and conditions">Terms &amp; Conditions</a></li>
+            <li><a href="../legal/privacy/" aria-label="privacy policy">Privacy policy</a></li>
+            <li><a href="../contact/" aria-label="contact">Contact us</a></li>
+        </ul>
+        <div class="p-4 flex flex-col">
+          <form id="newsletter" class="flex flex-col">
+            <label for="email" class="pb-2">Stay up-to-date with our auctions</label>
+            <input name="email" type="email" id="email" placeholder="Enter your e-mail" class="rounded p-2">
+            <button class="subscribe-button bg-brand-dark text-white rounded p-2" type="button">Subscribe</button>
+          </form>
+          <div>
+            <a href="https://www.instagram.com" aria-label="Link to instagram">
+              <i class="fa-brands fa-instagram p-2"></i>
+              <p class="p-1">Follow us on Instagram</p>
+              </a>
           </div>
-        </footer>
-    </body>
+        </div>
+      </footer>
+  </body>
 </html>

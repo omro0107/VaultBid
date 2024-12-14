@@ -10,17 +10,18 @@
         <link rel="preconnect" href="https://fonts.googleapis.com">
         <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
         <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400..900;1,400..900&display=swap" rel="stylesheet">
-                <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" integrity="sha512-z3gLpd7yknf1YoNbCzqRKc4qyor8gaKU1qmn+CShxbuBusANI9QpRohGBreCFkKxLhei6S9CQXFEbbKuqLg0DA==" crossorigin="anonymous" referrerpolicy="no-referrer">
-                <script type="module" src="../../src/js/views/register.js"></script>
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" integrity="sha512-z3gLpd7yknf1YoNbCzqRKc4qyor8gaKU1qmn+CShxbuBusANI9QpRohGBreCFkKxLhei6S9CQXFEbbKuqLg0DA==" crossorigin="anonymous" referrerpolicy="no-referrer">
+        <script type="module" src="../../src/js/views/register.js"></script>
+        <link rel="stylesheet" href="../../src/css/style.css"/>
     </head>
-    <body>
-        <header>
-            <a href="/" aria-label="Home"><h1 class="logo">VAULTBID</h1></a>
+    <body class="bg-brand font-body text-brand-dark">
+        <header class="flex justify-between items-center p-4">
+            <a href="/" aria-label="Home"><h1 class="text-xl">VAULTBID</h1></a>
         </header>
-        <main>
-          <section class="container">
-            <h2>Register new account</h2>
-            <form id="register-form" name="register">
+        <main class="flex flex-col items-center justify-center w-full">
+          <section class="p-4">
+            <h2 class="text-center text-lg mb-4">Register new account</h2>
+            <form id="register-form" name="register" class="flex flex-col">
                 <label for="name">Name:</label>
                 <input type="text" id="name" name="name" required autocomplete="name" pattern="^[\w]+$" maxlength="20" title="User name must only contain lower case and upper case letters, numbers and underscore. Example: Merry_Christmas24">
             
@@ -33,19 +34,19 @@
                 <label for="confirm-password">Confirm Password:</label>
                 <input type="password" id="confirm-password" name="confirm-password" required>
             
-                <button type="submit">Register</button>
+                <button type="submit" class="bg-brand-dark text-white rounded p-2">Register</button>
             </form>
-            <div class="loginaccount">
-              <p>Already have an account?</p>
-              <a href="../login/index.html" aria-label="Login">Log in here</a>
+            <div class="flex flex-row">
+              <p class="pl-4 text-xs">Already have an account?</p>
+              <a href="../login/index.html" aria-label="Login" class="text-blue-500 text-xs">Log in here</a>
           </div>
           </section>
-          <div id="userError" class="error-message"></div>
+          <div id="message" class="message hidden"></div>
         </main>
-        <footer> 
-          <div class="footer-left">
-            <div class="address">                        
-                <a href="/" aria-label="Home"><h4>VAULTBID</h4></a>
+        <footer class="m-3 flex flex-wrap justify-between items-start"> 
+          <div class="p-4">
+            <div class="pb-2">                        
+                <a href="/" aria-label="Home" class="pb-2"><h4>VAULTBID</h4></a>
                 <ul>
                   <li>VaultBid HQ</li>
                   <li>Dronning Eufemias gate 125</li>
@@ -55,21 +56,21 @@
             </div>
             <p>&copy; 2024 Vaultbid Group AS</p>
           </div>
-          <ul class="support">
+          <ul class="p-4 flex flex-col justify-center">
               <li><a href="../../legal/terms/" aria-label="terms and conditions">Terms &amp; Conditions</a></li>
               <li><a href="../../legal/privacy/" aria-label="privacy policy">Privacy policy</a></li>
               <li><a href="../../contact/" aria-label="contact">Contact us</a></li>
           </ul>
-          <div class="footer-right">
-            <form id="newsletter" class="newsletter-form">
-              <label for="email">Stay up-to-date with our auctions</label>
-              <input name="email" type="email" id="email" placeholder="Enter your e-mail">
-              <button class="subscribe-button" type="button">Subscribe</button>
+          <div class="p-4 flex flex-col">
+            <form id="newsletter" class="flex flex-col">
+              <label for="email" class="pb-2">Stay up-to-date with our auctions</label>
+              <input name="email" type="email" id="email" placeholder="Enter your e-mail" class="rounded p-2">
+              <button class="subscribe-button bg-brand-dark text-white rounded p-2" type="button">Subscribe</button>
             </form>
             <div>
-              <a href="https://www.instagram.com" aria-label="Link to instagram">
-                <i class="fa-brands fa-instagram"></i>
-                <p>Follow us on Instagram</p>
+              <a href="https://www.instagram.com" aria-label="Link to instagram" class="flex flex-row">
+                <i class="fa-brands fa-instagram p-2"></i>
+                <p class="p-1">Follow us on Instagram</p>
                 </a>
             </div>
           </div>

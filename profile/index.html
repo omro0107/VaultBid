@@ -11,43 +11,47 @@
         <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
         <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400..900;1,400..900&display=swap" rel="stylesheet">
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" integrity="sha512-z3gLpd7yknf1YoNbCzqRKc4qyor8gaKU1qmn+CShxbuBusANI9QpRohGBreCFkKxLhei6S9CQXFEbbKuqLg0DA==" crossorigin="anonymous" referrerpolicy="no-referrer">
+        <link rel="stylesheet" href="../src/css/style.css" />
         <script type="module" src="../src/js/views/profile.js"></script>
     </head>
-    <body>
-        <header>
-            <a href="/" aria-label="Home"><h1 class="logo">VAULTBID</h1></a>
-            <nav>
-                <ul>
-                    <li id="list"><a href="../auctions/create/" aria-label="List">List Item</a></li>
-                    <li id="profile"><a href="/profile/" aria-label="Profile">Profile</a></li>
-                    <li id="about"><a href="../about/" aria-label="About">About</a></li>
-                    <li id="contact"><a href="../contact/" aria-label="Contact">Contact</a></li>
-                </ul>
+    <body class="bg-brand font-body text-brand-dark">
+        <header class="flex justify-between items-center p-4">
+            <a href="/" aria-label="Home"><h1 class="text-xl">VAULTBID</h1></a>
+            <button id="menu-toggle" class="md:hidden focus:outline-none">
+              <i class="fas fa-bars"></i>
+            </button>
+            <nav class="hidden md:flex">
+              <ul class="flex frex-row">
+                  <li id="list" class="p-2"><a href="../auctions/create/" aria-label="List">List Item</a></li>
+                  <li id="profile" class="p-2"><a href="/profile/" aria-label="Profile">Profile</a></li>
+                  <li id="about" class="p-2"><a href="../about/" aria-label="About">About</a></li>
+                  <li id="contact" class="p-2"><a href="../contact/" aria-label="Contact">Contact</a></li>
+              </ul>
             </nav>
-            <ul>
-              <li><i class="fa-solid fa-magnifying-glass" id="search" aria-hidden="true"></i></li>
-              <li><i class="fa-solid fa-right-from-bracket" id="logout-btn" aria-hidden="true"></i></li>
-              <li><i class="fa-solid fa-right-to-bracket" id="login-btn" aria-hidden="true"></i></li>
-              <li><i class="fa-regular fa-pen-to-square" id="register-btn" aria-hidden="true"></i></li>
+            <ul class="flex">
+              <li id="search" class="p-2"><i class="fa-solid fa-magnifying-glass" aria-hidden="true"></i></li>
+              <li id="logout-btn"  class="p-2"><i class="fa-solid fa-right-from-bracket" aria-hidden="true"></i></li>
+              <li id="login-btn" class="p-2"><i class="fa-solid fa-right-to-bracket" aria-hidden="true"></i></li>
+              <li id="register-btn" class="p-2"><i class="fa-regular fa-pen-to-square" aria-hidden="true"></i></li>
             </ul>
         </header>
-        <main>
+        <main class="m-3">
           <div id="userProfile"></div>
-          <button id="open-update-profile">Update Profile</button>
+          <button id="open-update-profile" class=" bg-brand-dark text-white rounded p-2">Update Profile</button>
           <div id="update-profile-modal" class="modal" style="display: none;">
             <div class="modal-content">
-                <span class="close-modal">&times;</span>
+                <span class="close-modal  bg-brand-dark text-white rounded p-2">&times;</span>
                 <h2>Update Profile</h2>
                 <form id="updateProfile">
-                    <div>
+                    <div class="flex flex-col">
                         <label for="avatar">Avatar URL:</label>
                         <input type="url" id="avatar" name="avatar" placeholder="Enter new avatar URL">
                     </div>
-                    <div>
+                    <div class="flex flex-col">
                         <label for="bio">Bio:</label>
                         <textarea id="bio" name="bio" placeholder="Tell us about yourself"></textarea>
                     </div>
-                    <button type="submit">Save Changes</button>
+                    <button type="submit" class=" bg-brand-dark text-white rounded p-2">Save Changes</button>
                 </form>
             </div>
           </div>
@@ -56,10 +60,10 @@
             <div id="listings-thumbnails"></div>
           </section>
         </main>
-        <footer> 
-          <div class="footer-left">
-            <div class="address">                       
-                <a href="/" aria-label="Home"><h4>VAULTBID</h4></a>
+        <footer class="m-3 flex flex-wrap justify-between items-start">
+          <div class="p-4">
+            <div class="pb-2">                       
+                <a href="/" aria-label="Home"><h4 class="pb-2">VAULTBID</h4></a>
                 <ul>
                   <li>VaultBid HQ</li>
                   <li>Dronning Eufemias gate 125</li>
@@ -69,21 +73,21 @@
             </div>
             <p>&copy; 2024 Vaultbid Group AS</p>
           </div>
-          <ul class="support">
+          <ul class="p-4 flex flex-col justify-center">
               <li><a href="../legal/terms/" aria-label="terms and conditions">Terms &amp; Conditions</a></li>
               <li><a href="../legal/privacy/" aria-label="privacy policy">Privacy policy</a></li>
               <li><a href="../contact/" aria-label="contact">Contact us</a></li>
           </ul>
-          <div class="footer-right">
-            <form id="newsletter" class="newsletter-form">
-              <label for="email">Stay up-to-date with our auctions</label>
-              <input name="email" type="email" id="email" placeholder="Enter your e-mail">
-              <button class="subscribe-button" type="button">Subscribe</button>
+          <div class="p-4 flex flex-col">
+            <form id="newsletter" class="flex flex-col">
+              <label for="email" class="pb-2">Stay up-to-date with our auctions</label>
+              <input name="email" type="email" id="email" placeholder="Enter your e-mail" class="rounded p-2">
+              <button class="subscribe-button bg-brand-dark text-white rounded p-2" type="button">Subscribe</button>
             </form>
             <div>
-              <a href="https://www.instagram.com" aria-label="Link to instagram">
-                <i class="fa-brands fa-instagram"></i>
-                <p>Follow us on Instagram</p>
+              <a href="https://www.instagram.com" aria-label="Link to instagram" class="flex flex-row">
+                <i class="fa-brands fa-instagram p-2"></i>
+                <p class="p-2">Follow us on Instagram</p>
                 </a>
             </div>
           </div>

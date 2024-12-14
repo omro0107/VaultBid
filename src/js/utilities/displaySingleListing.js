@@ -38,7 +38,11 @@ export function renderSingleListing(listing) {
   }
 
   const sellerElement = document.createElement('p');
-  sellerElement.textContent = `Seller: ${listing.seller.name}`;
+if (listing.seller && listing.seller.name) {
+    sellerElement.textContent = `Seller: ${listing.seller.name}`;
+} else {
+    sellerElement.textContent = 'Seller: Unknown';
+}
 
   const endsAtElement = document.createElement('p');
   endsAtElement.textContent = `Auction Ends At: ${new Date(listing.endsAt).toLocaleString()}`; 

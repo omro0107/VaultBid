@@ -9,15 +9,16 @@ export function displayUser (userData) {
 
       userProfileContainer.innerHTML = '';
 
-      const avatarImg = createAvatar(userData.avatar.url);
-      const userName = createUserName(userData.name);
-      const userBio = createUserBio(userData.bio);
-      const userStats = createUserStats(userData);
+      const profileContainer = document.createElement("div");
+      profileContainer.className = "flex items-center";
 
-      userProfileContainer.appendChild(avatarImg);
-      userProfileContainer.appendChild(userName);
-      userProfileContainer.appendChild(userBio);
-      userProfileContainer.appendChild(userStats);
+      const avatarImg = createAvatar(userData.avatar.url);
+      const userInfoContainer = createUserInfo(userData);
+
+      profileContainer.appendChild(avatarImg);
+      profileContainer.appendChild(userInfoContainer);
+
+      userProfileContainer.appendChild(profileContainer);
   } catch (error) {
       handleError(error);
   }
@@ -26,7 +27,24 @@ export function displayUser (userData) {
 function createAvatar(avatarUrl) {
   const avatarImg = document.createElement("img");
   avatarImg.src = avatarUrl;
+  avatarImg.alt = "User Avatar";
+  avatarImg.className = "w-24 h-24 rounded-full object-cover mr-4";
   return avatarImg;
+}
+
+function createUserInfo(userData) {
+  const userInfoContainer = document.createElement("div");
+  userInfoContainer.className = "flex flex-col";
+
+  const userName = createUserName(userData.name);
+  const userBio = createUserBio(userData.bio);
+  const userStats = createUserStats(userData);
+
+  userInfoContainer.appendChild(userName);
+  userInfoContainer.appendChild(userBio);
+  userInfoContainer.appendChild(userStats);
+
+  return userInfoContainer;
 }
 
 function createUserName(name) {
