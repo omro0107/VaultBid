@@ -4,6 +4,8 @@ import { setLogoutListener } from "../ui/globals/logout.js";
 import { readProfile } from "../api/profile/read.js";
 import { getUsername } from "../utilities/storage.js";
 import { setupUpdateProfileModal } from "../ui/profile/update.js";
+import { accessToken } from "../api/constants.js";
+import { setupAuthButtons } from "../utilities/authButtons.js";
 
 
 document.addEventListener("DOMContentLoaded", async () => {
@@ -27,6 +29,7 @@ document.addEventListener("DOMContentLoaded", async () => {
 
   setLogoutListener();
   setupUpdateProfileModal(); 
+  setupAuthButtons(accessToken);
 });
 
 function handleError(error) {

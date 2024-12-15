@@ -1,7 +1,17 @@
 import { authGuard } from "../utilities/authGuard.js";
+import { accessToken } from "../api/constants.js";
+import { setupAuthButtons } from "../utilities/authButtons.js";
 import { onCreateListing } from "../ui/listings/create.js";
+import { setupHeaderEventListeners } from "../utilities/headerEventlisteners.js";
+import { setLogoutListener } from "../ui/globals/logout.js";
 
 authGuard();
+
+document.addEventListener("DOMContentLoaded", () => {
+  setupHeaderEventListeners();
+  setLogoutListener();
+  setupAuthButtons(accessToken);
+});
 
 const form = document.getElementById("list-form");
 
