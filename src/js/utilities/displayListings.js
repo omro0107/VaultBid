@@ -1,3 +1,6 @@
+import { showMessage } from "../utilities/showMessage.js";
+import { fetchListings } from "../api/listings/allListings.js";
+
 export function renderListings(listings) {
   const thumbnailsContainer = document.getElementById('listings-thumbnails');
   thumbnailsContainer.innerHTML = '';
@@ -38,3 +41,26 @@ export function updatePaginationControls(currentPage, totalPages) {
   document.getElementById('prev-page').disabled = currentPage === 1;
   document.getElementById('next-page').disabled = currentPage === totalPages;
 }
+
+
+export async function loadListings(page = 1) {
+  currentPage = page;
+  console.log(`loading listings for page: ${currentPage}`);
+  try {
+    const data = await fetchListings(12, page);
+    console.log('Fetched data:', data);
+
+    const listings = data.data
+    totalPages = data.meta.pageCount;
+    console.log(`Current Page: ${currentPage}, Total Pages: ${totalPages}`);
+    
+    renderListings(listings);
+    updatePaginationControls(currentPage, totalPages);
+  } catch (error) {
+    console.error('Failed to load listings:', error);
+    showMessage('Failed to load listings. Please try again later.');
+  }
+}
+
+let currentPage = 1;
+let totalPages = 1;

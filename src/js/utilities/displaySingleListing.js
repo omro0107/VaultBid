@@ -6,20 +6,41 @@ export function renderSingleListing(listing) {
 
   const listingContainer = document.getElementById('single-listing-display'); 
   listingContainer.innerHTML = '';
-  listingContainer.className = 'flex p-4';
+  listingContainer.className = 'flex flex-col p-4';
+
+  const messageContainer = document.createElement('div');
+  messageContainer.id = 'message-container';
+  messageContainer.className = 'hidden bg-green-500 text-white p-4 rounded mb-4';
+  listingContainer.appendChild(messageContainer);
 
   const mediaContainer = document.createElement('div');
-  mediaContainer.className = 'flex-shrink-0 mr-4';
+  mediaContainer.className = 'flex-shrink-0 mb-4';
 
+  const mainImage = document.createElement('img');
+  mainImage.className = 'w-full h-auto mb-2';
   if (listing.media.length > 0) {
-    listing.media.forEach(media => {
-      const mediaElement = document.createElement('img');
-      mediaElement.src = media.url;
-      mediaElement.alt = media.alt;
-      mediaElement.className = 'w-48 h-auto mb-2';
-      mediaContainer.appendChild(mediaElement);
+    mainImage.src = listing.media[0].url;
+    mainImage.alt = listing.media[0].alt;
+    }
+  mediaContainer.appendChild(mainImage);
+
+  const carouselContainer = document.createElement('div');
+  carouselContainer.className = 'flex overflow-x-auto';
+
+  listing.media.forEach((media, index) => {
+    const imgElement = document.createElement('img');
+    imgElement.src = media.url;
+    imgElement.alt = media.alt;
+    imgElement.className = 'w-24 h-auto mr-2 cursor-pointer';
+    imgElement.dataset.index = index;
+    imgElement.addEventListener('click', () => {
+      mainImage.src = media.url;
+      mainImage.alt = media.alt;
     });
-  }
+    carouselContainer.appendChild(imgElement);
+  });
+
+  mediaContainer.appendChild(carouselContainer);
   listingContainer.appendChild(mediaContainer);
 
   const contentContainer = document.createElement('div');
@@ -87,14 +108,12 @@ if (listing.seller && listing.seller.name) {
     const bidInput = document.createElement('input');
     bidInput.type = 'number';
     bidInput.id = 'bid-amount';
-    bidInput.name = 'bidAmount';
-    bidInput.min = 1;
     bidInput.required = true;
     bidInput.className = 'border rounded p-2 mb-2';
 
     const bidButton = document.createElement('button');
     bidButton.type = 'submit';
-    bidButton.className = 'bg-brand-dark text-white rounded p-2 hover:bg-accent';
+    bidButton.className = 'bg-brand-dark text-white rounded p-2';
     bidButton.textContent = 'Place Bid';
 
     bidForm.appendChild(bidLabel);
