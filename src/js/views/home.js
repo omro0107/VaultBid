@@ -9,6 +9,15 @@ let currentPage = 1;
 let totalPages = 1;
 
 document.addEventListener("DOMContentLoaded", () => {
+  const menuToggle = document.getElementById("menu-toggle");
+    const mobileMenu = document.getElementById("mobile-menu");
+
+    if (menuToggle) {
+        menuToggle.addEventListener("click", () => {
+            mobileMenu.classList.toggle("hidden");
+        });
+    }
+
   setupHeaderEventListeners();
   setupPagination(currentPage, totalPages, loadListings);
   loadListings(currentPage);

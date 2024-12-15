@@ -27,6 +27,15 @@ document.addEventListener("DOMContentLoaded", async () => {
     handleError(error);
   }
 
+  const menuToggle = document.getElementById("menu-toggle");
+    const mobileMenu = document.getElementById("mobile-menu");
+
+    if (menuToggle) {
+        menuToggle.addEventListener("click", () => {
+            mobileMenu.classList.toggle("hidden");
+        });
+    }
+
   setLogoutListener();
   setupUpdateProfileModal(); 
   setupAuthButtons(accessToken);
