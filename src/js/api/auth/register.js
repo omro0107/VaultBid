@@ -6,6 +6,11 @@ export async function register({
   email,
   password,
 }) {
+  const emailPattern = /^[a-zA-Z0-9._%+-]+@stud\.noroff\.no$/;
+  if (!emailPattern.test(email)) {
+    document.getElementById("userError").innerHTML = "Invalid email address. Please use an email that ends with @stud.noroff.no.";
+    return;
+  }
   try {
     const response = await fetch(`${API_AUTH_REGISTER}`, {
       method: "POST",
