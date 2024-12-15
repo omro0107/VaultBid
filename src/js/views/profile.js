@@ -7,6 +7,15 @@ import { setupUpdateProfileModal } from "../ui/profile/update.js";
 import { accessToken } from "../api/constants.js";
 import { setupAuthButtons } from "../utilities/authButtons.js";
 
+/**
+ * Initializes the user profile page.
+ *
+ * This function sets up the authentication guard, fetches the user's profile data,
+ * displays the user information, and sets up event listeners for the menu toggle,
+ * logout functionality, and profile update modal.
+ *
+ * @returns {void} This function does not return a value.
+ */
 
 document.addEventListener("DOMContentLoaded", async () => {
   authGuard();
@@ -15,7 +24,6 @@ document.addEventListener("DOMContentLoaded", async () => {
   
   try {
     const profileData = await readProfile(username);
-    console.log("Profile Data:", profileData);
 
     if (profileData && profileData.data) {
       localStorage.setItem("myUserData", JSON.stringify(profileData));

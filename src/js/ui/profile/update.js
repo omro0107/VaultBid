@@ -1,5 +1,14 @@
 import { updateProfile } from "../../api/profile/update.js";
 
+/**
+ * Sets up the update profile modal functionality.
+ *
+ * This function initializes the event listeners for opening and closing the modal,
+ * as well as handling the form submission for updating the user's profile.
+ *
+ * @returns {void} This function does not return a value.
+ */
+
 export function setupUpdateProfileModal() {
     const openModalBtn = document.getElementById('open-update-profile');
     const modal = document.getElementById('update-profile-modal');

@@ -1,9 +1,8 @@
 export function showMessage(message) {
     const messageContainer = document.getElementById('message-container');
-    console.log('Message Container:', messageContainer);
     if (messageContainer) {
         messageContainer.textContent = message;
-        messageContainer.style.display = 'block';
+        messageContainer.classList.remove('hidden');
         setTimeout(() => {
             messageContainer.style.display = 'none';
         }, 3000);

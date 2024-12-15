@@ -4,6 +4,15 @@ import { accessToken } from "../api/constants.js";
 import { setupAuthButtons } from "../utilities/authButtons.js";
 import { setLogoutListener } from "../ui/globals/logout.js";
 
+/**
+ * Initializes the single listing page.
+ *
+ * This function sets up event listeners for the menu toggle, fetches the single listing data,
+ * renders the listing, and sets up authentication buttons and logout listener.
+ *
+ * @returns {void} This function does not return a value.
+ */
+
 document.addEventListener("DOMContentLoaded", async () => {
   const menuToggle = document.getElementById("menu-toggle");
     const mobileMenu = document.getElementById("mobile-menu");
@@ -14,7 +23,6 @@ document.addEventListener("DOMContentLoaded", async () => {
         });
     }
   const showListing = await displaySingleListing();
-  console.log('Fetched listing data:', showListing);
   renderSingleListing(showListing);
   setupAuthButtons(accessToken);
   setLogoutListener();

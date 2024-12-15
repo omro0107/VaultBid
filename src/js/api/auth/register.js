@@ -1,6 +1,20 @@
 import { API_AUTH_REGISTER } from '../constants.js';
 import { headers } from '../headers.js';
 
+/**
+ * Registers a new user with the provided details.
+ *
+ * This function sends a POST request to the authentication API to register a new user.
+ * It validates the email format and handles the response, including error messages.
+ *
+ * @param {Object} userData - The user data for registration.
+ * @param {string} userData.name - The name of the user.
+ * @param {string} userData.email - The email address of the user.
+ * @param {string} userData.password - The password for the user account.
+ *
+ * @returns {Promise<Object>} The result of the registration process.
+ * @throws {Error} Throws an error if the fetch operation fails or if the response is not OK.
+ */
 export async function register({
   name,
   email,
