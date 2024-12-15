@@ -1,6 +1,6 @@
 import { accessToken } from "../api/constants.js";
 import { setLogoutListener } from "../ui/globals/logout.js";
-import { displayError } from "../api/listings/listing.js";
+import { showMessage } from "../utilities/showMessage.js";
 import { fetchListings } from "../api/listings/allListings.js";
 import { renderListings, updatePaginationControls } from "../utilities/displayListings.js";
 import { setupPagination } from "../utilities/pagination.js";
@@ -21,16 +21,58 @@ if (accessToken) {
 }
 
 document.addEventListener("DOMContentLoaded", () => {
+  const searchIcon = document.getElementById("search");
+  const searchInputContainer = document.getElementById("search-input-container");
+  const headerSearchInput = document.getElementById("header-search-input");
+
+  searchIcon.addEventListener("click", () => {
+    searchInputContainer.classList.toggle("hidden");
+    headerSearchInput.focus();
+  });
+
+  document.addEventListener("click", (event) => {
+    if (!searchIcon.contains(event.target) && !searchInputContainer.contains(event.target)) {
+      searchInputContainer.classList.add("hidden");
+    }
+  });
+
+  searchIcon.addEventListener("click", () => {
+    const query = headerSearchInput.value.trim();
+    if (query) {
+      console.log("Searching for:", query);
+      searchListings(query, currentPage);
+    }
+  });
+
+  headerSearchInput.addEventListener("keypress", (event) => {
+    if (event.key === 'Enter') {
+      const query = headerSearchInput.value.trim();
+      if (query) {
+        console.log("Searching for:", query);
+        searchListings(query, currentPage);
+      }
+    }
+  });
+
   const loginIcon = document.getElementById("login-btn");
 
   if (loginIcon) {
     loginIcon.addEventListener("click", () => {
-      window.location.href = "../../../auth/login/index.html";
+      window.location.href = "../../../auth/login/";
+    });
+  }
+
+  const registerIcon = document.getElementById("register-btn");
+
+  if (registerIcon) {
+    registerIcon.addEventListener("click", () => {
+      window.location.href = "../../../auth/register/";
     });
   }
 
   const searchButton = document.getElementById("search-button");
   const searchInput = document.getElementById("search-input");
+  
 
   searchButton.addEventListener("click", () => {
     const query = searchInput.value.trim();
@@ -64,7 +106,7 @@ async function loadListings(page = 1) {
     updatePaginationControls(currentPage, totalPages);
   } catch (error) {
     console.error('Failed to load listings:', error);
-    displayError('Failed to load listings. Please try again later.');
+    showMessage('Failed to load listings. Please try again later.');
   }
 }
 
@@ -73,3 +115,4 @@ document.addEventListener("DOMContentLoaded", () => {
   loadListings(currentPage);
   setLogoutListener();
 });
+

@@ -1,3 +1,37 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+@layer components {
+  .header-title {
+    @apply text-xl
+  }
+
+  .nav-link {
+    @apply p-2 hover:line-through
+  }
+
+  .icon-button {
+    @apply p-2 text-gray-700 hover:text-gray-900;
+  }
+  .btn {
+    @apply font-bold py-2 px-4 rounded;
+  }
+
+  .btn-primary {
+    @apply bg-accent text-white hover:bg-brand-dark;
+  }
+
+  .btn-secondary {
+    @apply bg-brand-dark text-white;
+  }
+
+  .header {
+    @apply flex justify-between items-center p-4;
+  }
+
+  img {
+    @apply rounded-lg shadow-md;
+    border: 2px solid #ccc;
+  }
+}
