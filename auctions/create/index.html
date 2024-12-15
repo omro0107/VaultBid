@@ -2,9 +2,9 @@
 <html lang="en">
     <head>
         <meta charset="utf-8">
-        <meta name="description" content="Your search for art, design, collectibles, and hidden gems starts here!">
+        <meta name="description" content="Create a new listing">
         <meta name="viewport" content="width=device-width, initial-scale=1">
-        <title>Home</title>
+        <title>Create listing</title>
         <link rel="icon" type="image/png" sizes="32x32" href="/public/favicon_io/favicon-32x32.png">
         <link rel="icon" type="image/png" sizes="16x16" href="/public/favicon_io/favicon-16x16.png">
         <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -50,22 +50,22 @@
             <div id="list-item-form" >
                 <form id="list-form" class="flex flex-col w-2/3">
                     <label for="title">Title</label>
-                    <input type="text" id="title" name="title" required>
+                    <input type="text" id="title" name="title" class="rounded mb-4" required>
                     <label for="item-description">Describe item</label>
-                    <textarea id="item-description" name="item-description" rows="8" required></textarea>
+                    <textarea id="item-description" name="item-description" rows="8" class="rounded mb-4" required></textarea>
                     <label for="images">Upload images</label>
                     <div id="image-upload-container">
-                        <div class="image-upload">
-                            <input type="url" name="imageURL" placeholder="Enter image URL" required>
-                            <input type="text" name="imageAltText" placeholder="Describe the image content">
-                            <button type="button" class="remove-image bg-brand-dark text-white rounded p-2" aria-label="Remove image">Remove</button>
+                        <div class="image-upload mb-4">
+                            <input type="url" name="imageURL" placeholder="Enter image URL" class="rounded mb-4" required>
+                            <input type="text" name="imageAltText" placeholder="Describe the image content" class="rounded mb-4">
+                            <button type="button" class="remove-image bg-brand-dark text-white rounded mb-4" aria-label="Remove image">Remove</button>
                         </div>
                     </div>
                     <button type="button" id="add-image" aria-label="Add more images" class="bg-brand-dark text-white rounded p-2">Add more images</button>
                     <label for="date-time">Auction ending</label>
-                    <input type="datetime-local" id="date-time" name="dateTime" required>
+                    <input type="datetime-local" id="date-time" name="dateTime" class="rounded mb-4" required>
                     <label for="tags">Tags (comma-separated):</label>
-                    <input type="text" id="tags" name="tags" placeholder="e.g., art, vintage, collectible">
+                    <input type="text" id="tags" name="tags" placeholder="e.g., art, vintage, collectible" class="rounded mb-4">
                     <button type="submit" class="bg-brand-dark text-white rounded p-2">Create listing</button>
                 </form>
             </div>

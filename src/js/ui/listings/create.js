@@ -1,6 +1,15 @@
 import { createListing } from "../../api/listings/create.js";
 
-
+/**
+ * Handles the creation of a new listing.
+ *
+ * This function is triggered when the listing creation form is submitted. It gathers
+ * the input values from the form, constructs a listing object, and sends it to the API
+ * to create a new listing. It also handles success and error responses.
+ *
+ * @param {Event} e - The event object representing the form submission event.
+ * @returns {Promise<void>} This function does not return a value.
+ */
 export async function onCreateListing(e) {
     e.preventDefault();
 

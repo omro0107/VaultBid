@@ -52,7 +52,6 @@ export function setupHeaderEventListeners() {
 
   if (logoutBtn) {
     logoutBtn.addEventListener("click", () => {
-      console.log("Logout clicked");
     });
   }
 }

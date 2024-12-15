@@ -1,12 +1,58 @@
 import { showMessage } from "../utilities/showMessage.js";
 import { placeBid } from "../api/listings/bid.js";
 
+/**
+ * Renders a single listing on the page.
+ *
+ * This function displays the details of a specific listing, including its media, title, description,
+ * tags, number of bids, highest bid amount, seller information, and auction end time. It also
+ * provides a form for placing a bid if the user is logged in.
+ *
+ * @param {Object} listing - The listing object containing details to be displayed.
+ * @param {string} listing.id - The unique identifier for the listing.
+ * @param {string} listing.title - The title of the listing.
+ * @param {string} listing.description - A description of the listing.
+ * @param {Array<Object>} listing.media - An array of media objects associated with the listing.
+ * @param {string} listing.media[].url - The URL of the media.
+ * @param {string} listing.media[].alt - The alt text for the media.
+ * @param {Array<string>} listing.tags - An array of tags associated with the listing.
+ * @param {Object} listing._count - An object containing counts related to the listing.
+ * @param {number} listing._count.bids - The number of bids placed on the listing.
+ * @param {Array<Object>} listing.bids - An array of bid objects associated with the listing.
+ * @param {Object} listing.seller - The seller information for the listing.
+ * @param {string} listing.seller.name - The name of the seller.
+ * @param {string} listing.endsAt - The end time of the auction in ISO format.
+ *
+ * @returns {void} This function does not return a value.
+ */
+
 export function renderSingleListing(listing) {
   const isLoggedIn = !! localStorage.getItem("accessToken");
 
   const listingContainer = document.getElementById('single-listing-display'); 
   listingContainer.innerHTML = '';
   listingContainer.className = 'flex flex-col p-4';
+
+  const skeletonContainer = document.createElement('div');
+  skeletonContainer.className = 'flex flex-col space-y-4';
+  
+  const skeletonImage = document.createElement('div');
+  skeletonImage.className = 'bg-gray-200 h-48 rounded-lg animate-pulse';
+  skeletonContainer.appendChild(skeletonImage);
+
+  const skeletonTitle = document.createElement('div');
+  skeletonTitle.className = 'bg-gray-200 h-6 rounded-lg animate-pulse w-3/4';
+  skeletonContainer.appendChild(skeletonTitle);
+
+  const skeletonDescription = document.createElement('div');
+  skeletonDescription.className = 'bg-gray-200 h-4 rounded-lg animate-pulse w-full';
+  skeletonContainer.appendChild(skeletonDescription);
+
+  const skeletonTags = document.createElement('div');
+  skeletonTags.className = 'bg-gray-200 h-4 rounded-lg animate-pulse w-1/2';
+  skeletonContainer.appendChild(skeletonTags);
+
+  listingContainer.appendChild(skeletonContainer);
 
   const messageContainer = document.createElement('div');
   messageContainer.id = 'message-container';
@@ -131,10 +177,14 @@ if (listing.seller && listing.seller.name) {
         return;
       }
 
-      console.log('Placing bid with amount:', bidAmount);
-
-      const updatedListingData = await placeBid(listing.id, bidAmount);
-      renderSingleListing(updatedListingData);
+      try {
+        const updatedListingData = await placeBid(listing.id, bidAmount);
+        renderSingleListing(updatedListingData);
+        showMessage('Bid placed successfully!');
+      } catch (error) {
+        console.error('Error placing bid:', error);
+        showMessage('Failed to place bid. Please try again.');
+      }
     });
   } else {
     const messageElement = document.createElement('p');

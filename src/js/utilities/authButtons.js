@@ -1,5 +1,4 @@
 export function setupAuthButtons(accessToken) {
-  console.log("Setting up auth buttons with accessToken:", accessToken);
   const loginBtn = document.getElementById("login-btn");
   const registerBtn = document.getElementById("register-btn");
   const logoutBtn = document.getElementById("logout-btn");
