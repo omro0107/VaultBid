@@ -1,9 +1,6 @@
-# Nordic Science Nexus
+# VaultBid
 
 This is a school project where I created a website using HTML, JS and Tailwind CSS.
-
-![image]()
-
 
 ## Description
 
