@@ -44,30 +44,35 @@
               <li id="register-btn" class="p-2"><i class="fa-regular fa-pen-to-square" aria-hidden="true"></i></li>
             </ul>
         </header>
-        <main class="m-3">
-          <div id="userProfile"></div>
-          <button id="open-update-profile" class=" bg-brand-dark text-white rounded p-2">Update Profile</button>
-          <div id="update-profile-modal" class="modal" style="display: none;">
-            <div class="modal-content">
-                <span class="close-modal  bg-brand-dark text-white rounded p-2">&times;</span>
-                <h2>Update Profile</h2>
-                <form id="updateProfile">
-                    <div class="flex flex-col">
-                        <label for="avatar">Avatar URL:</label>
-                        <input type="url" id="avatar" name="avatar" placeholder="Enter new avatar URL">
-                    </div>
-                    <div class="flex flex-col">
-                        <label for="bio">Bio:</label>
-                        <textarea id="bio" name="bio" placeholder="Tell us about yourself"></textarea>
-                    </div>
-                    <button type="submit" class=" bg-brand-dark text-white rounded p-2">Save Changes</button>
-                </form>
+        <main class="m-3 flex justify-center">
+          <div class="max-w-2xl w-full mb-16">
+            <div id="userProfile"></div>
+            <button id="open-update-profile" class="bg-brand-dark text-white rounded p-2 mb-4">Update Profile</button>
+            <div id="update-profile-modal" class="modal fixed inset-0 z-50 flex items-center justify-center" style="display: none;">
+              <div class="fixed inset-0 bg-black bg-opacity-50"></div>
+              <div class="modal-content bg-white p-6 rounded-lg shadow-xl relative z-10 max-w-md w-full mx-4">
+                  <div class="flex justify-between items-center mb-4">
+                    <h2 class="text-lg font-semibold">Update Profile</h2>
+                    <button class="close-modal text-gray-500 hover:text-gray-700 text-2xl leading-none">&times;</button>
+                  </div>
+                  <form id="updateProfile" class="space-y-4">
+                      <div class="flex flex-col">
+                          <label for="avatar" class="mb-2">Avatar URL:</label>
+                          <input type="url" id="avatar" name="avatar" placeholder="Enter new avatar URL" class="border rounded p-2">
+                      </div>
+                      <div class="flex flex-col">
+                          <label for="bio" class="mb-2">Bio:</label>
+                          <textarea id="bio" name="bio" placeholder="Tell us about yourself" class="border rounded p-2 h-32"></textarea>
+                      </div>
+                      <button type="submit" class="bg-brand-dark text-white rounded p-2 w-full">Save Changes</button>
+                  </form>
+              </div>
             </div>
+            <div id="current-holding" class="mb-4"></div>
+            <section>
+              <div id="listings-thumbnails"></div>
+            </section>
           </div>
-          <div id="current-holding"></div>
-          <section>
-            <div id="listings-thumbnails"></div>
-          </section>
         </main>
         <footer class="m-3 flex flex-wrap justify-between items-start">
           <div class="p-4">

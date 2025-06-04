@@ -15,7 +15,15 @@ import { API_AUCTION_LISTINGS } from '../constants.js';
  */
 export async function fetchListings(limit = 12, page = 1) {
   try {
-    const response = await fetch(`${API_AUCTION_LISTINGS}?limit=${limit}&page=${page}`, {
+    // Try to sort by end date to get active auctions first
+    const queryParams = new URLSearchParams({
+      limit: limit.toString(),
+      page: page.toString(),
+      sort: 'endsAt',
+      sortOrder: 'desc'
+    });
+
+    const response = await fetch(`${API_AUCTION_LISTINGS}?${queryParams}`, {
       method: "GET",
       headers: headers(),
     });

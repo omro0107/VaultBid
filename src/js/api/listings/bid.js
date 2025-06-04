@@ -33,7 +33,11 @@ export async function placeBid(listingId, bidAmount) {
 
     if (!response.ok) {
       console.error('Error Data:', responseBody);
-      throw new Error(`Failed to place bid. Status: ${response.status}, Message: ${responseBody.message || 'unknown error'}`);
+      console.error('Full error details:', JSON.stringify(responseBody, null, 2));
+      if (responseBody.errors && responseBody.errors.length > 0) {
+        console.error('Specific errors:', responseBody.errors);
+      }
+      throw new Error(`Failed to place bid. Status: ${response.status}, Message: ${responseBody.message || responseBody.errors?.[0]?.message || 'unknown error'}`);
     }
 
     showMessage('Bid placed successfully!');

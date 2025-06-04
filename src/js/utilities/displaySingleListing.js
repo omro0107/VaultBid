@@ -1,5 +1,6 @@
 import { showMessage } from "../utilities/showMessage.js";
 import { placeBid } from "../api/listings/bid.js";
+import { tokenService } from "../services/TokenService.js";
 
 /**
  * Renders a single listing on the page.
@@ -27,32 +28,44 @@ import { placeBid } from "../api/listings/bid.js";
  */
 
 export function renderSingleListing(listing) {
-  const isLoggedIn = !! localStorage.getItem("accessToken");
+  const isLoggedIn = tokenService.isAuthenticated();
+  const isListingEnded = listing && listing.endsAt && new Date(listing.endsAt) <= new Date();
 
   const listingContainer = document.getElementById('single-listing-display'); 
   listingContainer.innerHTML = '';
-  listingContainer.className = 'flex flex-col p-4';
+  listingContainer.className = 'container mx-auto max-w-6xl px-4 py-8';
 
-  const skeletonContainer = document.createElement('div');
-  skeletonContainer.className = 'flex flex-col space-y-4';
-  
-  const skeletonImage = document.createElement('div');
-  skeletonImage.className = 'bg-gray-200 h-48 rounded-lg animate-pulse';
-  skeletonContainer.appendChild(skeletonImage);
+  // Only show skeleton if listing data is not available
+  if (!listing) {
+    const skeletonContainer = document.createElement('div');
+    skeletonContainer.className = 'flex flex-col space-y-4';
+    skeletonContainer.id = 'skeleton-loader';
+    
+    const skeletonImage = document.createElement('div');
+    skeletonImage.className = 'bg-gray-200 h-48 rounded-lg animate-pulse';
+    skeletonContainer.appendChild(skeletonImage);
 
-  const skeletonTitle = document.createElement('div');
-  skeletonTitle.className = 'bg-gray-200 h-6 rounded-lg animate-pulse w-3/4';
-  skeletonContainer.appendChild(skeletonTitle);
+    const skeletonTitle = document.createElement('div');
+    skeletonTitle.className = 'bg-gray-200 h-6 rounded-lg animate-pulse w-3/4';
+    skeletonContainer.appendChild(skeletonTitle);
 
-  const skeletonDescription = document.createElement('div');
-  skeletonDescription.className = 'bg-gray-200 h-4 rounded-lg animate-pulse w-full';
-  skeletonContainer.appendChild(skeletonDescription);
+    const skeletonDescription = document.createElement('div');
+    skeletonDescription.className = 'bg-gray-200 h-4 rounded-lg animate-pulse w-full';
+    skeletonContainer.appendChild(skeletonDescription);
 
-  const skeletonTags = document.createElement('div');
-  skeletonTags.className = 'bg-gray-200 h-4 rounded-lg animate-pulse w-1/2';
-  skeletonContainer.appendChild(skeletonTags);
+    const skeletonTags = document.createElement('div');
+    skeletonTags.className = 'bg-gray-200 h-4 rounded-lg animate-pulse w-1/2';
+    skeletonContainer.appendChild(skeletonTags);
 
-  listingContainer.appendChild(skeletonContainer);
+    listingContainer.appendChild(skeletonContainer);
+    return;
+  }
+
+  // Remove skeleton if it exists
+  const existingSkeleton = document.getElementById('skeleton-loader');
+  if (existingSkeleton) {
+    existingSkeleton.remove();
+  }
 
   const messageContainer = document.createElement('div');
   messageContainer.id = 'message-container';
@@ -60,10 +73,10 @@ export function renderSingleListing(listing) {
   listingContainer.appendChild(messageContainer);
 
   const mediaContainer = document.createElement('div');
-  mediaContainer.className = 'flex-shrink-0 mb-4';
+  mediaContainer.className = 'flex flex-col items-center mb-8';
 
   const mainImage = document.createElement('img');
-  mainImage.className = 'w-full h-auto mb-2';
+  mainImage.className = 'w-full max-w-2xl h-auto max-h-96 object-cover rounded-lg mb-2 mx-auto';
   if (listing.media.length > 0) {
     mainImage.src = listing.media[0].url;
     mainImage.alt = listing.media[0].alt;
@@ -71,7 +84,7 @@ export function renderSingleListing(listing) {
   mediaContainer.appendChild(mainImage);
 
   const carouselContainer = document.createElement('div');
-  carouselContainer.className = 'flex overflow-x-auto';
+  carouselContainer.className = 'flex overflow-x-auto gap-4 mt-4 max-w-2xl mx-auto';
 
   listing.media.forEach((media, index) => {
     const imgElement = document.createElement('img');
@@ -90,7 +103,7 @@ export function renderSingleListing(listing) {
   listingContainer.appendChild(mediaContainer);
 
   const contentContainer = document.createElement('div');
-  contentContainer.className = 'flex flex-col';
+  contentContainer.className = 'flex flex-col max-w-2xl mx-auto w-full bg-white p-6 rounded-lg shadow-sm';
 
   const titleElement = document.createElement('h2');
   titleElement.className = 'text-lg font-semibold mb-2';
@@ -145,7 +158,16 @@ if (listing.seller && listing.seller.name) {
   bidForm.id = 'bid-form';
   bidForm.className = 'mt-4';
 
-  if (isLoggedIn) {
+  if (isListingEnded) {
+    // Show ended auction message
+    const endedMessageElement = document.createElement('div');
+    endedMessageElement.className = 'bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded mb-4';
+    endedMessageElement.innerHTML = `
+      <strong>Auction Ended</strong><br>
+      This auction has ended on ${new Date(listing.endsAt).toLocaleString()}. No more bids can be placed.
+    `;
+    contentContainer.appendChild(endedMessageElement);
+  } else if (isLoggedIn) {
     const bidLabel = document.createElement('label');
     bidLabel.setAttribute('for', 'bid-amount');
     bidLabel.className = 'mb-2';
@@ -179,11 +201,46 @@ if (listing.seller && listing.seller.name) {
 
       try {
         const updatedListingData = await placeBid(listing.id, bidAmount);
-        renderSingleListing(updatedListingData);
-        showMessage('Bid placed successfully!');
+        
+        // Show success modal
+        const successModal = document.createElement('div');
+        successModal.className = 'fixed inset-0 flex items-center justify-center z-50';
+        successModal.innerHTML = `
+          <div class="fixed inset-0 bg-black opacity-50"></div>
+          <div class="bg-white p-6 rounded-lg shadow-xl z-10 max-w-md w-full mx-4">
+            <div class="text-center">
+              <div class="mx-auto flex items-center justify-center h-12 w-12 rounded-full bg-green-100 mb-4">
+                <svg class="h-6 w-6 text-green-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+                </svg>
+              </div>
+              <h3 class="text-lg leading-6 font-medium text-gray-900 mb-2">Bid Placed Successfully!</h3>
+              <p class="text-sm text-gray-500 mb-4">Your bid of $${bidAmount} has been placed.</p>
+              <button class="bg-brand-dark text-white px-4 py-2 rounded hover:bg-brand-darker">Close</button>
+            </div>
+          </div>
+        `;
+        
+        document.body.appendChild(successModal);
+        
+        // Add click handlers
+        const closeButton = successModal.querySelector('button');
+        const backdrop = successModal.querySelector('.fixed.inset-0.bg-black');
+        
+        const closeModal = () => {
+          successModal.remove();
+          renderSingleListing(updatedListingData);
+        };
+        
+        closeButton.addEventListener('click', closeModal);
+        backdrop.addEventListener('click', closeModal);
+        
+        // Auto close after 3 seconds
+        setTimeout(closeModal, 3000);
+        
       } catch (error) {
         console.error('Error placing bid:', error);
-        showMessage('Failed to place bid. Please try again.');
+        showMessage('error', 'Failed to place bid. Please try again.');
       }
     });
   } else {

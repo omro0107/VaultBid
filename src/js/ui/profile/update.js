@@ -1,32 +1,38 @@
 import { updateProfile } from "../../api/profile/update.js";
+import { tokenService } from "../../services/TokenService.js";
+import { validationService } from "../../services/ValidationService.js";
+import { showMessage } from "../../utilities/showMessage.js";
 
 /**
- * Sets up the update profile modal functionality.
+ * Sets up the update profile modal functionality with enhanced security.
  *
  * This function initializes the event listeners for opening and closing the modal,
- * as well as handling the form submission for updating the user's profile.
+ * and handles the form submission for updating the user's profile with input validation
+ * and secure data storage.
  *
- * @returns {void} This function does not return a value.
+ * @returns {void}
  */
-
 export function setupUpdateProfileModal() {
     const openModalBtn = document.getElementById('open-update-profile');
     const modal = document.getElementById('update-profile-modal');
     const closeModalBtn = modal.querySelector('.close-modal');
     const updateForm = document.getElementById('updateProfile');
+    const errorDisplay = document.getElementById('update-error-message');
 
     openModalBtn.addEventListener('click', () => {
-        const storedUserData = JSON.parse(localStorage.getItem('myUserData'));
-        if (storedUserData) {
-            const userData = storedUserData.data;
-            document.getElementById('avatar').value = userData.avatar.url;
-            document.getElementById('bio').value = userData.bio;
+        const userData = tokenService.getUserData();
+        if (userData?.data) {
+            document.getElementById('avatar').value = userData.data.avatar?.url || '';
+            document.getElementById('bio').value = userData.data.bio || '';
         }
         modal.style.display = 'block';
     });
 
     closeModalBtn.addEventListener('click', () => {
         modal.style.display = 'none';
+        if (errorDisplay) {
+            errorDisplay.textContent = '';
+        }
     });
 
     updateForm.addEventListener('submit', async (e) => {
@@ -36,23 +42,64 @@ export function setupUpdateProfileModal() {
         const bio = document.getElementById('bio').value;
 
         try {
-            const storedUserData = JSON.parse(localStorage.getItem('myUserData'));
-            const username = storedUserData.data.name;
+            // Validate inputs
+            const urlValidation = validationService.validateUrl(avatarUrl);
+            if (!urlValidation.isValid) {
+                showMessage('userError', urlValidation.message);
+                return;
+            }
 
-            const response = await updateProfile(username, {
-                avatar: avatarUrl,
-                bio: bio
+            const bioValidation = validationService.validateDescription(bio);
+            if (!bioValidation.isValid) {
+                showMessage('userError', bioValidation.message);
+                return;
+            }
+
+            // Security check
+            const securityChecks = [
+                validationService.checkSecurityThreats(avatarUrl),
+                validationService.checkSecurityThreats(bio)
+            ];
+
+            const securityThreats = securityChecks.find(check => !check.isSafe);
+            if (securityThreats) {
+                showMessage('userError', 'Invalid input detected');
+                return;
+            }
+
+            const userData = tokenService.getUserData();
+            if (!userData?.data?.name) {
+                throw new Error('User data not found');
+            }
+
+            const response = await updateProfile(userData.data.name, {
+                avatar: urlValidation.value,
+                bio: bioValidation.value
             });
 
-            storedUserData.data.avatar.url = response.data.avatar.url;
-            storedUserData.data.bio = response.data.bio;
-            localStorage.setItem('myUserData', JSON.stringify(storedUserData));
+            if (!response?.data) {
+                throw new Error('Invalid response data');
+            }
 
-            location.reload();
+            // Update stored user data
+            const updatedUserData = {
+                ...userData,
+                data: {
+                    ...userData.data,
+                    avatar: { url: response.data.avatar.url },
+                    bio: response.data.bio
+                }
+            };
+            
+            tokenService.setUserData(updatedUserData);
+            
+            // Show success message and reload
+            showMessage('success', 'Profile updated successfully');
+            setTimeout(() => location.reload(), 1000);
 
         } catch (error) {
             console.error('Failed to update profile:', error);
-            alert('Failed to update profile. Please try again.');
+            showMessage('userError', error.message || 'Failed to update profile. Please try again.');
         }
     });
 }

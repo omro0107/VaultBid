@@ -27,7 +27,7 @@ export async function updateProfile(username, { avatar, bio }) {
     if (avatar) {
       updateData.avatar = { 
         url: avatar,
-        alt: ""
+        alt: "Profile avatar"
       };
     }
     

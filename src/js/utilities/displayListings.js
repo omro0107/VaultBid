@@ -2,10 +2,23 @@ import { showMessage } from "../utilities/showMessage.js";
 import { fetchListings } from "../api/listings/allListings.js";
 
 /**
+ * Checks if a listing has ended by comparing the end date with the current time.
+ *
+ * @param {Object} listing - The listing object to check.
+ * @param {string} listing.endsAt - The end time of the auction in ISO format.
+ *
+ * @returns {boolean} True if the listing has ended, false otherwise.
+ */
+function isListingEnded(listing) {
+  if (!listing.endsAt) return false;
+  return new Date(listing.endsAt) <= new Date();
+}
+
+/**
  * Renders a list of listings in the thumbnails container.
  *
- * This function takes an array of listings and creates thumbnail elements for each listing,
- * appending them to the thumbnails container in the DOM.
+ * This function takes an array of listings, filters out ended auctions, and creates thumbnail elements 
+ * for each active listing, appending them to the thumbnails container in the DOM.
  *
  * @param {Array<Object>} listings - An array of listing objects to be rendered.
  * @param {string} listings[].id - The unique identifier for the listing.
@@ -13,6 +26,7 @@ import { fetchListings } from "../api/listings/allListings.js";
  * @param {Array<Object>} listings[].media - An array of media objects associated with the listing.
  * @param {string} listings[].media[].url - The URL of the media.
  * @param {string} listings[].media[].alt - The alt text for the media.
+ * @param {string} listings[].endsAt - The end time of the auction in ISO format.
  *
  * @returns {void} This function does not return a value.
  */
@@ -20,10 +34,21 @@ export function renderListings(listings) {
   const thumbnailsContainer = document.getElementById('listings-thumbnails');
   thumbnailsContainer.innerHTML = '';
 
-  listings.forEach(listing => {
+  // Filter out ended listings
+  const activeListings = listings.filter(listing => !isListingEnded(listing));
+
+  activeListings.forEach(listing => {
     const thumbnailElement = createThumbnailElement(listing);
     thumbnailsContainer.appendChild(thumbnailElement);
   });
+
+  // Show message if no active listings
+  if (activeListings.length === 0 && listings.length > 0) {
+    const messageElement = document.createElement('div');
+    messageElement.className = 'col-span-full text-center py-8 text-gray-500';
+    messageElement.textContent = 'No active auctions available at the moment.';
+    thumbnailsContainer.appendChild(messageElement);
+  }
 }
 
 /**
@@ -94,7 +119,7 @@ export function updatePaginationControls(currentPage, totalPages) {
  * @returns {Promise<void>} This function returns a promise that resolves when the listings are loaded.
  */
 export async function loadListings(page = 1) {
-  currentPage = page;
+  setCurrentPage(page);
 
   const thumbnailsContainer = document.getElementById('listings-thumbnails');
   thumbnailsContainer.innerHTML = '';
@@ -107,17 +132,37 @@ export async function loadListings(page = 1) {
   try {
     const data = await fetchListings(12, page);
 
-    const listings = data.data
-    totalPages = data.meta.pageCount;
+    const listings = data.data;
+    setTotalPages(data.meta.pageCount);
     
     thumbnailsContainer.innerHTML = '';
     renderListings(listings);
-    updatePaginationControls(currentPage, totalPages);
+    updatePaginationControls(getCurrentPage(), getTotalPages());
   } catch (error) {
     console.error('Failed to load listings:', error);
     showMessage('Failed to load listings. Please try again later.');
   }
 }
 
-let currentPage = 1;
-let totalPages = 1;
+// State management for pagination
+const paginationState = {
+  currentPage: 1,
+  totalPages: 1
+};
+
+// Export functions to get and set pagination state
+export function getCurrentPage() {
+  return paginationState.currentPage;
+}
+
+export function getTotalPages() {
+  return paginationState.totalPages;
+}
+
+export function setCurrentPage(page) {
+  paginationState.currentPage = page;
+}
+
+export function setTotalPages(pages) {
+  paginationState.totalPages = pages;
+}

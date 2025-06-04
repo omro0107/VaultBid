@@ -44,32 +44,49 @@
             <li id="register-btn" class="p-2"><i class="fa-regular fa-pen-to-square"  aria-hidden="true"></i></li>
           </ul>
         </header>
-        <main class="m-3">
-          <section>
-            <h2 class="heading">Create new listing</h2>
-            <div id="list-item-form" >
-                <form id="list-form" class="flex flex-col w-2/3">
-                    <label for="title">Title</label>
-                    <input type="text" id="title" name="title" class="rounded mb-4" required>
-                    <label for="item-description">Describe item</label>
-                    <textarea id="item-description" name="item-description" rows="8" class="rounded mb-4" required></textarea>
-                    <label for="images">Upload images</label>
-                    <div id="image-upload-container">
-                        <div class="image-upload mb-4">
-                            <input type="url" name="imageURL" placeholder="Enter image URL" class="rounded mb-4" required>
-                            <input type="text" name="imageAltText" placeholder="Describe the image content" class="rounded mb-4">
-                            <button type="button" class="remove-image bg-brand-dark text-white rounded mb-4" aria-label="Remove image">Remove</button>
-                        </div>
-                    </div>
-                    <button type="button" id="add-image" aria-label="Add more images" class="bg-brand-dark text-white rounded p-2">Add more images</button>
-                    <label for="date-time">Auction ending</label>
-                    <input type="datetime-local" id="date-time" name="dateTime" class="rounded mb-4" required>
-                    <label for="tags">Tags (comma-separated):</label>
-                    <input type="text" id="tags" name="tags" placeholder="e.g., art, vintage, collectible" class="rounded mb-4">
-                    <button type="submit" class="bg-brand-dark text-white rounded p-2">Create listing</button>
-                </form>
-            </div>
-          </section>
+        <main class="m-3 flex justify-center">
+          <div class="max-w-2xl w-full mb-16">
+            <section>
+              <h2 class="text-xl font-semibold mb-4">Create new listing</h2>
+              <div id="list-item-form">
+                  <form id="list-form" class="flex flex-col w-full space-y-4">
+                      <div class="flex flex-col">
+                          <label for="title" class="mb-2">Title</label>
+                          <input type="text" id="title" name="title" class="border rounded p-2" autocomplete="off" required>
+                      </div>
+
+                      <div class="flex flex-col">
+                          <label for="item-description" class="mb-2">Describe item</label>
+                          <textarea id="item-description" name="item-description" rows="8" class="border rounded p-2" autocomplete="off" required></textarea>
+                      </div>
+
+                      <div class="flex flex-col">
+                          <label class="mb-2">Upload images</label>
+                          <div id="image-upload-container" class="space-y-4">
+                              <div class="image-upload">
+                                  <input type="url" name="imageURL" placeholder="Enter image URL" class="border rounded p-2 w-full mb-2" autocomplete="url" required>
+                                  <input type="text" name="imageAltText" placeholder="Describe the image content" class="border rounded p-2 w-full mb-2" autocomplete="off">
+                                  <button type="button" class="remove-image bg-brand-dark text-white rounded p-2">Remove</button>
+                              </div>
+                          </div>
+                          <button type="button" id="add-image" aria-label="Add more images" class="bg-brand-dark text-white rounded p-2 mt-2">Add more images</button>
+                      </div>
+
+                      <div class="flex flex-col">
+                          <label for="date-time" class="mb-2">Auction ending</label>
+                          <input type="datetime-local" id="date-time" name="dateTime" class="border rounded p-2" autocomplete="off" required>
+                      </div>
+
+                      <div class="flex flex-col">
+                          <label for="tags" class="mb-2">Tags (comma-separated):</label>
+                          <input type="text" id="tags" name="tags" placeholder="e.g., art, vintage, collectible" class="border rounded p-2" autocomplete="off">
+                      </div>
+
+                      <button type="submit" class="bg-brand-dark text-white rounded p-2">Create listing</button>
+                  </form>
+              </div>
+            </section>
+          </div>
         </main>
         <footer class="m-3 flex flex-wrap justify-between items-start"> 
           <div class="p-4">
@@ -91,14 +108,14 @@
           </ul>
           <div class="p-4 flex flex-col">
             <form id="newsletter" class="flex flex-col">
-              <label for="email">Stay up-to-date with our auctions</label>
-              <input name="email" type="email" id="email" placeholder="Enter your e-mail">
+              <label for="email" class="pb-2">Stay up-to-date with our auctions</label>
+              <input name="email" type="email" id="email" placeholder="Enter your e-mail" class="rounded p-2">
               <button class="subscribe-button bg-brand-dark text-white rounded p-2" type="button">Subscribe</button>
             </form>
             <div>
               <a href="https://www.instagram.com" aria-label="Link to instagram" class="flex flex-row">
                 <i class="fa-brands fa-instagram p-2"></i>
-                <p class="p-1">Follow us on Instagram</p>
+                <p class="p-2">Follow us on Instagram</p>
                 </a>
             </div>
           </div>
