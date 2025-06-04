@@ -156,7 +156,7 @@ if (listing.seller && listing.seller.name) {
 
   const bidForm = document.createElement('form');
   bidForm.id = 'bid-form';
-  bidForm.className = 'mt-4';
+  bidForm.className = 'mt-6 p-4 bg-gray-50 rounded-lg border';
 
   if (isListingEnded) {
     // Show ended auction message
@@ -170,18 +170,21 @@ if (listing.seller && listing.seller.name) {
   } else if (isLoggedIn) {
     const bidLabel = document.createElement('label');
     bidLabel.setAttribute('for', 'bid-amount');
-    bidLabel.className = 'mb-2';
+    bidLabel.className = 'block text-sm font-medium text-gray-700 mb-2';
     bidLabel.textContent = 'Enter your bid amount:';
 
     const bidInput = document.createElement('input');
     bidInput.type = 'number';
     bidInput.id = 'bid-amount';
     bidInput.required = true;
-    bidInput.className = 'border rounded p-2 mb-2';
+    bidInput.step = '0.01';
+    bidInput.min = '0';
+    bidInput.placeholder = 'Enter amount...';
+    bidInput.className = 'w-full border border-gray-300 rounded-md px-3 py-2 mb-4 focus:outline-none focus:ring-2 focus:ring-brand-dark focus:border-transparent';
 
     const bidButton = document.createElement('button');
     bidButton.type = 'submit';
-    bidButton.className = 'bg-brand-dark text-white rounded p-2';
+    bidButton.className = 'w-full bg-brand-dark text-white rounded-md py-2 px-4 hover:bg-brand-darker focus:outline-none focus:ring-2 focus:ring-brand-dark focus:ring-offset-2 transition-colors duration-200';
     bidButton.textContent = 'Place Bid';
 
     bidForm.appendChild(bidLabel);
