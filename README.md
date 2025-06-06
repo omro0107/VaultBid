@@ -4,6 +4,10 @@
 
 This is a school project where I created a website using HTML, JS and Tailwind CSS.
 
+## To wiew live application, visit:
+
+**[Vaultbid](https://vaultbid.netlify.app/)**
+
 ## Description
 
 This website is for a auctionhouse. First, I designed the website using FIGMA, and then I built it using HTML for structure, JS for functionality, and CSS for styling.
