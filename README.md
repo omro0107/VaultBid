@@ -1,5 +1,7 @@
 # VaultBid
 
+![VaultBid Screenshot](public/images/Readme.png)
+
 This is a school project where I created a website using HTML, JS and Tailwind CSS.
 
 ## Description
@@ -7,6 +9,7 @@ This is a school project where I created a website using HTML, JS and Tailwind C
 This website is for a auctionhouse. First, I designed the website using FIGMA, and then I built it using HTML for structure, JS for functionality, and CSS for styling.
 
 ## Site architecture
+
 - Home
 - Profile
 - Single listing
@@ -37,6 +40,7 @@ This website is for a auctionhouse. First, I designed the website using FIGMA, a
 ### Prerequisites
 
 Ensure you have the following installed:
+
 - npm (Node Package Manager)
 
 ### Installing
@@ -68,6 +72,7 @@ npm run start
 ```
 
 ### Usage
+
 After starting the app, open your web browser and go to http://localhost:3000 to view the website.
 
 ## Contributing
@@ -91,4 +96,3 @@ This project is created for educational purposes and is released under GNU GENER
 ## Acknowledgments
 
 Images from www.unsplash.com
- 
